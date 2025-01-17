@@ -1,0 +1,178 @@
+img {
+    user-select: none;
+    pointer-events: none;
+    border: 1px solid #ddd;
+    object-fit: cover;
+}
+
+.photo {
+    position: relative;
+}
+
+/* 3 Photos */
+
+#template-3-photos {
+    width: 120px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+.img-template-3-photos {
+    width: 100%;
+    height: calc(33% - 2px);
+}
+
+/* 4 Photos */
+
+#template-4-photos {
+    width: 120px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+.img-template-4-photos {
+    width: 100%;
+    height: calc(25% - 2px);
+}
+
+/* 4 Photos - 2 photos 1 line */
+
+#template-4-photos-2 {
+    width: 240px;
+    height: 360px;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.img-template-4-photos-2 {
+    width: calc(50% - 12px - 5px);
+    height: 36%;
+    position: absolute;
+}
+
+.img-1 {
+    top: 12px;
+    left: 12px;
+}
+
+.img-2 {
+    bottom: calc(36% + 12px + 10px);
+    right: 12px;
+}
+
+.img-4 {
+    right: 12px;
+    bottom: 12px;
+}
+
+.img-3 {
+    top: calc(36% + 12px + 10px);
+    left: 12px;
+}
+
+/* 3 Photos Preview */
+.photo.photo-preview#template-3-photos {
+    width: 180px; /* Tăng kích thước hoặc điều chỉnh theo ý muốn */
+    height: 540px;
+    background-color: #f0f0f0; /* Thay đổi màu nền */
+    border: 2px solid #aaa; /* Thay đổi màu viền */
+    padding: 16px;
+}
+
+/* 4 Photos Preview */
+.photo.photo-preview#template-4-photos {
+    width: 180px;
+    height: 540px;
+    background-color: #f0f0f0;
+    border: 2px solid #aaa;
+    padding: 16px;
+}
+
+/* 4 Photos - 2 photos 1 line Preview */
+.photo.photo-preview#template-4-photos-2 {
+    width: 360px;
+    height: 540px;
+    background-color: #f0f0f0;
+    border: 2px solid #aaa;
+}
+
+/* 3 Photos Preview Images */
+.photo.photo-preview#template-3-photos .img-template-3-photos {
+    height: calc(33% - 4px); /* Tăng khoảng cách */
+    border: 1px solid #ccc; /* Thêm viền cho ảnh */
+}
+
+/* 4 Photos Preview Images */
+.photo.photo-preview#template-4-photos .img-template-4-photos {
+    height: calc(25% - 4px);
+    border: 1px solid #ccc;
+}
+
+/* 4 Photos - 2 photos 1 line Preview Images */
+.photo.photo-preview#template-4-photos-2 .img-template-4-photos-2 {
+    width: calc(50% - 16px - 10px); /* Tăng khoảng cách */
+    height: 36%;
+    border: 1px solid #ccc;
+}
+
+
+
+/* 3 Photos Print */
+.photo.photo-print#template-3-photos {
+    width: 600px; /* Tăng kích thước cho in ấn */
+    height: 1800px;
+    background-color: #ffffff; /* Nền trắng */
+    border: 2px solid #000; /* Viền đậm hơn */
+    padding: 60px; /* Khoảng cách tăng */
+}
+
+/* 4 Photos Print */
+.photo.photo-print#template-4-photos {
+    width: 600px;
+    height: 1800px;
+    background-color: #ffffff;
+    border: 2px solid #000;
+    padding: 60px;
+}
+
+/* 4 Photos - 2 photos 1 line Print */
+.photo.photo-print#template-4-photos-2 {
+    width: 1200px; /* Tăng kích thước để cân đối với layout */
+    height: 1800px;
+    background-color: #ffffff;
+    border: 2px solid #000;
+    padding: 60px;
+}
+
+/* 3 Photos Print Images */
+.photo.photo-print#template-3-photos .img-template-3-photos {
+    height: calc(33% - 6px); /* Tăng khoảng cách ảnh */
+    border: 2px solid #999; /* Viền tối hơn */
+    object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+}
+
+/* 4 Photos Print Images */
+.photo.photo-print#template-4-photos .img-template-4-photos {
+    height: calc(25% - 6px); /* Giữ cân đối */
+    border: 2px solid #999;
+    object-fit: cover;
+}
+
+/* 4 Photos - 2 photos 1 line Print Images */
+.photo.photo-print#template-4-photos-2 .img-template-4-photos-2 {
+    width: calc(50% - 20px - 12px); /* Giữ layout chính xác */
+    height: 36%;
+    border: 2px solid #999;
+    object-fit: cover;
+}

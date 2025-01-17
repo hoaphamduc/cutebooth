@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cutebooth - Photobooth Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="template.css">
+    <script src="dom-to-image.min.js"></script>
+</head>
+
+<body>
+    <section id="welcome">
+        <h1>Chào mừng bạn đến với Cutebooth! Đây là trang web chụp Photobooth Online miễn phí cho các bạn ❤</h1>
+        <button id="start-session">
+            <span>Bắt đầu</span>
+        </button>
+    </section>
+
+    <section id="select-template">
+        <h2>Chọn mẫu ảnh mà bạn muốn sử dụng</h2>
+        
+        <div class="template-container">
+            <!-- Template Ảnh Dài (Photostrip, 3 ảnh) (600 x 1800 px) -->
+            <div class="photo-template">
+                <div class="photo" id="template-3-photos">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
+                </div>
+            </div>
+
+            <!-- Template Ảnh Dài (Photostrip, 4 ảnh) (600 x 1800 px) -->
+            <div class="photo-template">
+                <div class="photo" id="template-4-photos">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                </div>
+            </div>
+
+            <!-- Template Ảnh rộng (1800 x 1200 px) -->
+            <div class="photo-template">
+                <div class="photo" id="template-4-photos-2">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-1">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-2">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-3">
+                    <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-4">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="upload-or-take-photos">
+        <div id="selected-template-container">
+            <!-- Template được chọn sẽ hiển thị tại đây -->
+        </div>
+        <button id="go-to-select-frame"><span>Chọn khung</span></button>
+        <div id="camera-preview">
+            <!-- Camera preview or live feed -->
+        </div>
+        
+        <h3>Hàng đợi ảnh (tối đa: 6 ảnh)</h3>
+        <button id="upload-photo"><span>Tải ảnh lên</span></button>
+        <button id="take-photo"><span>Chụp ảnh</span></button>
+        <div id="photo-queue">
+            <!-- Preview of uploaded or taken photos -->
+        </div>
+    </section>
+
+    <section id="select-frame">
+        <h2>Chọn khung ảnh</h2>
+        <div class="frame-options">
+            <!-- Template và frames sẽ hiển thị tại đây -->
+        </div>
+        <button id="go-to-preview-and-save"><span>Bước tiếp theo</span></button>
+    </section>
+
+    <section id="preview-and-save">
+        <h2>Xem trước và lưu ảnh</h2>
+        <div id="photo-preview">
+            <!-- Preview của ảnh sẽ được hiển thị tại đây -->
+        </div>
+        <button id="save-photo"><span>Lưu ảnh</span></button>
+    </section>
+</body>
+
+<script src="script.js"></script>
+
+</html>
