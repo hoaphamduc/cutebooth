@@ -422,6 +422,8 @@ function getFramesByTemplateType(templateType) {
             { id: 2, src: "/assets/frame/4-photos-2/frame-2.png" },
             { id: 1, src: "/assets/frame/4-photos-2/frame-3.png" },
             { id: 2, src: "/assets/frame/4-photos-2/frame-4.png" },
+            { id: 1, src: "/assets/frame/4-photos-2/frame-5.png" },
+            { id: 2, src: "/assets/frame/4-photos-2/frame-6.png" },
         ],
     };
 
