@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cutebooth - Photobooth Online</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="template.css">
-    <script src="dom-to-image.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/template.css">
+    <script src="js/dom-to-image.min.js"></script>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <!-- Template Ảnh rộng (1800 x 1200 px) -->
+            <!-- Template Ảnh rộng (1200 x 1800 px) -->
             <div class="photo-template">
                 <div class="photo" id="template-4-photos-2">
                     <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-1">
@@ -55,17 +55,30 @@
     </section>
 
     <section id="upload-or-take-photos">
-        <div id="selected-template-container">
-            <!-- Template được chọn sẽ hiển thị tại đây -->
-        </div>
-        <button id="go-to-select-frame"><span>Chọn khung</span></button>
-        <div id="camera-preview">
-            <!-- Camera preview or live feed -->
+        <h2>Thêm ảnh vào mẫu mà bạn đã chọn</h2>
+        <div style="display: flex; width: 100%; flex-wrap: wrap; margin-top: 50px; gap: 50px;">
+            <div style="display: flex; flex-direction: column; gap: 5px; align-items: center; width: fit-content;">
+                <div id="selected-template-container">
+                    <span>Bạn chưa chọn mẫu ảnh nào vui lòng chọn mẫu ảnh tại <span class="span-btn" onclick="scrollToSelectTemplate()">đây</span></span>
+                    <!-- Template được chọn sẽ hiển thị tại đây -->
+                </div>
+                <div class="flex-btn-container">
+                    <span>Đã thêm ảnh xong?</span>
+                    <button id="go-to-select-frame"><span>Chọn khung</span></button>
+                </div>
+            </div>
+            <div id="camera-preview">
+                <!-- Video và nút đã được định nghĩa sẵn -->
+                <video id="camera-video" autoplay playsinline></video>
+                <div class="flex-btn-container">
+                    <button id="capture-button"><span>Chụp ảnh</span></button>
+                    <span>Hoặc bạn có thể</span>
+                    <button id="upload-photo"><span>Tải ảnh lên</span></button>
+                </div>
+            </div>
         </div>
         
-        <h3>Hàng đợi ảnh (tối đa: 6 ảnh)</h3>
-        <button id="upload-photo"><span>Tải ảnh lên</span></button>
-        <button id="take-photo"><span>Chụp ảnh</span></button>
+        <h3 style="margin-top: 15px;">Hàng đợi ảnh (tối đa: 6 ảnh). Nhấn vào ảnh trong hàng đợi để điền ảnh vào mẫu, bạn có thể nhấn thêm lần nữa để hủy chọn.</h3>
         <div id="photo-queue">
             <!-- Preview of uploaded or taken photos -->
         </div>
@@ -73,8 +86,10 @@
 
     <section id="select-frame">
         <h2>Chọn khung ảnh</h2>
+        <div id="template-need-select-frame"></div>
         <div class="frame-options">
-            <!-- Template và frames sẽ hiển thị tại đây -->
+            <span>Bạn chưa làm bước trước vui lòng thêm ảnh hoặc template tại <span class="span-btn" onclick="scrollToAddPhoto()">đây</span></span>
+            <!-- Frames sẽ hiển thị tại đây -->
         </div>
         <button id="go-to-preview-and-save"><span>Bước tiếp theo</span></button>
     </section>
@@ -88,6 +103,6 @@
     </section>
 </body>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 
 </html>

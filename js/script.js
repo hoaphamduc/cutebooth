@@ -1,16 +1,27 @@
 console.log('Cảm ơn bạn đã ghé thăm trang web của meobeo! Chúc bạn vui vẻ! Mọi thông tin chi tiết vui lòng liên hệ https://meobeo.dev');
 console.log('Nếu có ý tưởng hay muốn đóng góp cho project vui lòng truy cập https://github.com/hoaphamduc/cutebooth');
 
-document.getElementById("start-session").addEventListener("click", function () {
+// document.addEventListener('DOMContentLoaded', () => alert('Website hiện tại chưa hỗ trợ tốt trên mobile. Nếu có lỗi các bạn vui lòng dùng trên PC :3 Mình cảm ơn!'));
+
+function scrollToSelectTemplate() {
     const targetSection = document.getElementById("select-template");
     targetSection.scrollIntoView({
         behavior: "smooth"
     });
-});
+}
+
+function scrollToAddPhoto() {
+    const targetSection = document.getElementById("upload-or-take-photos");
+    targetSection.scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+document.getElementById("start-session").addEventListener("click", scrollToSelectTemplate);
 
 // Thêm ảnh vào queue để xếp
 
-const MAX_PHOTOS = 6;
+const MAX_PHOTOS = 6; // Giới hạn số ảnh trong queue
 const photoQueue = document.getElementById("photo-queue");
 const cameraPreview = document.getElementById("camera-preview");
 let selectedTemplate = null; // Lưu template được chọn
@@ -19,7 +30,7 @@ let filledSlots = []; // Lưu danh sách các slot trong template đã được 
 
 // Function to Add Photo to Queue
 function addPhotoToQueue(photoUrl) {
-    if (!photoUrl) return; // Kiểm tra nếu photoUrl hợp lệ
+    if (!photoUrl) return;
 
     if (photoQueue.children.length >= MAX_PHOTOS) {
         alert("Hàng đợi đã đầy ảnh, vui lòng sử dụng ảnh ở hàng đợi hoặc xóa bớt để thêm ảnh!");
@@ -69,7 +80,7 @@ function addPhotoToQueue(photoUrl) {
     photoQueue.appendChild(photoWrapper);
 }
 
-// Handle Upload Photo
+// Xử lý chọn ảnh
 document.getElementById("upload-photo").addEventListener("click", function () {
     const fileInput = document.createElement("input");
     fileInput.type = "file";
@@ -92,30 +103,19 @@ document.getElementById("upload-photo").addEventListener("click", function () {
     document.body.removeChild(fileInput);
 });
 
-// Handle Take Photo
-document.getElementById("take-photo").addEventListener("click", function () {
-    const video = document.createElement("video");
-    // Tạo nút "Capture Photo"
-    const captureButton = document.createElement("button");
+// Xử lý chụp ảnh
+document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("camera-video");
+    const captureButton = document.getElementById("capture-button");
 
-    // Tạo span để chứa chữ "Capture Photo"
-    const span = document.createElement("span");
-    span.textContent = "Capture Photo";
-
-    // Thêm span vào button
-    captureButton.appendChild(span);
-
-    cameraPreview.innerHTML = "";
-    cameraPreview.appendChild(video);
-    cameraPreview.appendChild(captureButton);
-
-    // Start camera
+    // Mở camera khi trang web được tải
     navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
             video.srcObject = stream;
             video.play();
 
+            // Xử lý chụp ảnh khi bấm nút
             captureButton.addEventListener("click", function () {
                 const canvas = document.createElement("canvas");
                 canvas.width = video.videoWidth;
@@ -126,14 +126,10 @@ document.getElementById("take-photo").addEventListener("click", function () {
 
                 const photoUrl = canvas.toDataURL("image/png");
                 addPhotoToQueue(photoUrl);
-
-                // Stop the video stream after capture
-                // stream.getTracks().forEach((track) => track.stop());
-                // cameraPreview.innerHTML = "";
             });
         })
         .catch((err) => {
-            alert("Unable to access camera: " + err.message);
+            alert("Không thể truy cập vào máy ảnh: " + err.message + ". Vui lòng kiểm tra cài đặt trình duyệt và cho phép sử dụng quyền máy ảnh!");
         });
 });
 
@@ -143,7 +139,7 @@ document.querySelectorAll(".photo-template").forEach((template) => {
         // Sao chép template được chọn
         selectedTemplate = template.cloneNode(true);
         selectedTemplate.id = "selected-template";
-        selectedTemplate.style.pointerEvents = "none"; // Ngăn tương tác với template
+        selectedTemplate.style.pointerEvents = "none";
 
         // Lưu loại template dựa trên id
         const photoDiv = selectedTemplate.querySelector(".photo");
@@ -172,7 +168,7 @@ document.querySelectorAll(".photo-template").forEach((template) => {
 // Điền ảnh vào template
 function fillTemplateWithImage(photoUrl) {
     if (!selectedTemplate) {
-        alert("Please select a template first.");
+        alert("Vui lòng chọn một mẫu trước đã bro.");
         return false;
     }
 
@@ -184,7 +180,7 @@ function fillTemplateWithImage(photoUrl) {
             return true;
         }
     }
-    alert("All slots in the template are filled!");
+    alert("Tất cả các vị trí trong mẫu đã được lấp đầy!");
     return false;
 }
 
@@ -206,7 +202,7 @@ function clearImageFromTemplate(photoUrl) {
 document.getElementById("go-to-select-frame").addEventListener("click", function () {
     // Kiểm tra nếu template đã được chọn
     if (!selectedTemplate) {
-        alert("Please select a template first.");
+        alert("Vui lòng chọn một mẫu trước đã bro.");
         return;
     }
 
@@ -217,12 +213,13 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
     );
 
     if (!allSlotsFilled) {
-        alert("Please fill all the slots in the template before proceeding.");
+        alert("Vui lòng chọn ảnh cho tất cả các vị trí trong mẫu trước khi tiếp tục.");
         return;
     }
 
     // Hiển thị template đang được edit trong section select-frame
     const selectFrameSection = document.getElementById("select-frame");
+    const selectFrameContainer = document.getElementById('template-need-select-frame');
     const frameContainer = document.querySelector(".frame-options");
     frameContainer.innerHTML = ""; // Xóa các frame cũ
 
@@ -234,29 +231,20 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
         if (!previewContainer) {
             previewContainer = document.createElement("div");
             previewContainer.id = "frame-preview";
-            previewContainer.style.position = "absolute";
-            previewContainer.style.top = "0";
-            previewContainer.style.left = "0";
-            previewContainer.style.width = "100%";
-            previewContainer.style.height = "100%";
-            previewContainer.style.backgroundSize = "cover";
-            previewContainer.style.backgroundPosition = "center";
-            previewContainer.style.opacity = "0.7";
-            previewContainer.style.zIndex = "1";
-            previewContainer.style.pointerEvents = "none"; // Ngăn tương tác
-            targetPhoto.style.position = "relative"; // Đảm bảo targetPhoto có position
+            previewContainer.style.pointerEvents = "none";
+            targetPhoto.style.position = "relative";
             targetPhoto.appendChild(previewContainer);
         }
 
-        // Thêm khối photo vào section select-frame
-        const existingPhotoContainer = selectFrameSection.querySelector(".photo");
+        // Thêm khối photo vào template-need-select-frame
+        const existingPhotoContainer = selectFrameContainer.querySelector(".photo");
         if (existingPhotoContainer) {
-            selectFrameSection.replaceChild(targetPhoto, existingPhotoContainer);
+            selectFrameContainer.replaceChild(targetPhoto, existingPhotoContainer);
         } else {
-            selectFrameSection.insertAdjacentElement("afterbegin", targetPhoto);
+            selectFrameContainer.insertAdjacentElement("afterbegin", targetPhoto);
         }
     } else {
-        alert("No valid photo container found in the selected template.");
+        alert("Không tìm thấy vùng chứa ảnh hợp lệ trong mẫu đã chọn.");
         return;
     }
 
@@ -289,9 +277,6 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
         frameElement.src = frame.src;
         frameElement.className = "frame-option";
         frameElement.alt = `Frame ${frame.id}`;
-        frameElement.style.cursor = "pointer";
-        frameElement.style.margin = "5px";
-        frameElement.style.width = "100px"; // Điều chỉnh kích thước frame nếu cần
         frameElement.addEventListener("click", function () {
             // Đặt frame làm background của preview
             const framePreview = document.getElementById("frame-preview");
@@ -317,7 +302,7 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
     }
 
     if (!selectedTemplate) {
-        alert("No template selected!");
+        alert("Chưa có mẫu nào được chọn!");
         return;
     }
 
@@ -328,7 +313,7 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
     );
 
     if (!allSlotsFilled) {
-        alert("Please fill all the slots in the template before proceeding.");
+        alert("Vui lòng chọn ảnh cho tất cả các vị trí trong mẫu trước khi tiếp tục.");
         return;
     }
 
@@ -336,7 +321,7 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
     const selectFrameSection = document.getElementById("select-frame");
     const photoDiv = selectFrameSection.querySelector(".photo");
     if (!photoDiv) {
-        alert("No photo container found in select-frame.");
+        alert("Không tìm thấy vùng chứa ảnh nào trong khung chọn.");
         return;
     }
 
@@ -363,7 +348,7 @@ document.getElementById("save-photo").addEventListener("click", function () {
     const photoPreview = document.querySelector(".photo-preview");
 
     if (!photoPreview) {
-        alert("No photo preview found to save!");
+        alert("Không tìm thấy bản xem trước ảnh nào để lưu!");
         return;
     }
 
@@ -388,17 +373,21 @@ document.getElementById("save-photo").addEventListener("click", function () {
             // Xóa container tạm thời sau khi tạo ảnh
             document.body.removeChild(tempContainer);
 
-            // Tạo link download
+            // Tạo một thẻ <a> để tải ảnh xuống
             const downloadLink = document.createElement("a");
             downloadLink.href = dataUrl;
-            downloadLink.download = "cutebooth.png"; // Tên file sẽ lưu
+            downloadLink.download = "saved-image.png"; // Tên file tải xuống
+
+            // Kích hoạt sự kiện nhấp chuột vào thẻ <a> để tải file
             downloadLink.click();
+
+            alert("Hình ảnh đã được tải xuống thành công!");
         })
         .catch(function (error) {
             // Xóa container tạm thời trong trường hợp lỗi
             document.body.removeChild(tempContainer);
-            console.error("Error generating image:", error);
-            alert("An error occurred while saving the photo.");
+            console.error("Lỗi tạo hình ảnh:", error);
+            alert("Đã xảy ra lỗi khi tải ảnh.");
         });
 });
 
@@ -406,16 +395,18 @@ document.getElementById("save-photo").addEventListener("click", function () {
 function getFramesByTemplateType(templateType) {
     const framesData = {
         "template-3-photos": [
-            { id: 1, src: "/assets/frame/frame3-photos-1.png" },
-            { id: 2, src: "/assets/frame/frame3-photos-2.png" },
+            // { id: 1, src: "/assets/frame/frame3-photos-1.png" },
+            // { id: 2, src: "/assets/frame/frame3-photos-2.png" },
         ],
         "template-4-photos": [
-            { id: 1, src: "/assets/frame/frame4-photos-1.png" },
-            { id: 2, src: "/assets/frame/frame4-photos-2.png" },
+            { id: 1, src: "/assets/frame/4-photos/frame-1.png" },
+            // { id: 2, src: "/assets/frame/frame4-photos-2.png" },
         ],
         "template-4-photos-2": [
-            { id: 1, src: "/assets/frame/frame4-photos2-1.png" },
-            { id: 2, src: "/assets/frame/frame4-photos2-2.png" },
+            { id: 1, src: "/assets/frame/4-photos-2/frame-1.png" },
+            { id: 2, src: "/assets/frame/4-photos-2/frame-2.png" },
+            { id: 1, src: "/assets/frame/4-photos-2/frame-3.png" },
+            { id: 2, src: "/assets/frame/4-photos-2/frame-4.png" },
         ],
     };
 
