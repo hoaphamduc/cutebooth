@@ -16,7 +16,7 @@ img {
     height: 360px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    justify-content: space-between;
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 12px;
@@ -24,33 +24,27 @@ img {
 
 .img-template-3-photos {
     width: 100%;
-    height: calc(33% - 2px);
+    height: calc(33% - 6px);
 }
 
 .photo.photo-preview#template-3-photos {
     width: 180px;
     height: 540px;
-    background-color: #f0f0f0;
-    border: 2px solid #aaa;
-    padding: 16px;
+    padding: 18px;
 }
 
 .photo.photo-preview#template-3-photos .img-template-3-photos {
-    height: calc(33% - 4px); /* Tăng khoảng cách */
-    border: 1px solid #ccc; /* Thêm viền cho ảnh */
+    height: calc(33% - 9px);
 }
 
 .photo.photo-print#template-3-photos {
-    width: 600px; /* Tăng kích thước cho in ấn */
+    width: 600px;
     height: 1800px;
-    background-color: #ffffff; /* Nền trắng */
-    border: 2px solid #000; /* Viền đậm hơn */
-    padding: 60px; /* Khoảng cách tăng */
+    padding: 60px;
 }
 
 .photo.photo-print#template-3-photos .img-template-3-photos {
-    height: calc(33% - 6px);
-    object-fit: cover;
+    height: calc(33% - 30px);
 }
 
 /* End 3 Photos */
@@ -62,7 +56,7 @@ img {
     height: 360px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    justify-content: space-between;
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 12px;
@@ -70,35 +64,27 @@ img {
 
 .img-template-4-photos {
     width: 100%;
-    height: calc(25% - 2px);
+    height: calc(25% - 3px);
 }
 
-/* 4 Photos Preview */
 .photo.photo-preview#template-4-photos {
     width: 180px;
     height: 540px;
-    background-color: #f0f0f0;
-    border: 2px solid #aaa;
-    padding: 16px;
+    padding: 18px;
 }
 
 .photo.photo-preview#template-4-photos .img-template-4-photos {
-    height: calc(25% - 4px);
-    border: 1px solid #ccc;
+    height: calc(25% - 4.5px);
 }
 
 .photo.photo-print#template-4-photos {
     width: 600px;
     height: 1800px;
-    background-color: #ffffff;
-    border: 2px solid #000;
     padding: 60px;
 }
 
 .photo.photo-print#template-4-photos .img-template-4-photos {
-    height: calc(25% - 6px);
-    border: 2px solid #999;
-    object-fit: cover;
+    height: calc(25% - 15px);
 }
 
 /* End 4 Photos */
@@ -114,7 +100,7 @@ img {
 }
 
 .img-template-4-photos-2 {
-    width: calc(50% - 12px - 5px);
+    width: calc(50% - 12px - 6px);
     height: 36%;
     position: absolute;
 }
@@ -125,7 +111,7 @@ img {
 }
 
 .img-2 {
-    bottom: calc(36% + 12px + 10px);
+    bottom: calc(36% + 12px + 12px);
     right: 12px;
 }
 
@@ -135,7 +121,7 @@ img {
 }
 
 .img-3 {
-    top: calc(36% + 12px + 10px);
+    top: calc(36% + 12px + 12px);
     left: 12px;
 }
 

@@ -81,20 +81,36 @@ function addPhotoToQueue(photoUrl) {
 }
 
 // Xử lý chọn ảnh
+let photoCount = 0;
+
 document.getElementById("upload-photo").addEventListener("click", function () {
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*";
+    fileInput.multiple = true; // Cho phép chọn nhiều tệp
     fileInput.style.display = "none";
 
     fileInput.addEventListener("change", function () {
-        const file = fileInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                addPhotoToQueue(e.target.result);
-            };
-            reader.readAsDataURL(file);
+        const files = fileInput.files;
+        if (files.length > 0) {
+            const remainingSlots = MAX_PHOTOS - photoCount;
+            const filesToAdd = Math.min(files.length, remainingSlots);
+
+            for (let i = 0; i < filesToAdd; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    addPhotoToQueue(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+
+            photoCount += filesToAdd;
+
+            if (photoCount >= MAX_PHOTOS) {
+                alert(`Bạn đã đạt đến giới hạn ${MAX_PHOTOS} ảnh.`);
+            }
         }
     });
 
@@ -129,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch((err) => {
-            alert("Không thể truy cập vào máy ảnh: " + err.message + ". Vui lòng kiểm tra cài đặt trình duyệt và cho phép sử dụng quyền máy ảnh!");
+            alert("Không thể truy cập vào máy ảnh: " + err.message + ". Vui lòng kiểm tra cài đặt trình duyệt và máy ảnh của bạn!");
         });
 });
 
@@ -376,12 +392,11 @@ document.getElementById("save-photo").addEventListener("click", function () {
             // Tạo một thẻ <a> để tải ảnh xuống
             const downloadLink = document.createElement("a");
             downloadLink.href = dataUrl;
-            downloadLink.download = "saved-image.png"; // Tên file tải xuống
+            downloadLink.download = "cutebooth.png"; // Tên file tải xuống
 
             // Kích hoạt sự kiện nhấp chuột vào thẻ <a> để tải file
             downloadLink.click();
 
-            alert("Hình ảnh đã được tải xuống thành công!");
         })
         .catch(function (error) {
             // Xóa container tạm thời trong trường hợp lỗi

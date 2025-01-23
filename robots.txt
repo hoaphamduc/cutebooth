@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /test/
+
+# Cho phép mọi thứ khác được thu thập
+Allow: /
+
+# Chỉ định sơ đồ trang web (sitemap) để hỗ trợ các công cụ tìm kiếm
+Sitemap: https://cutebooth.netlify.app/sitemap.xml
