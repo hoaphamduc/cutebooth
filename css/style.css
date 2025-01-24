@@ -420,7 +420,7 @@ video {
 
 /* End donate */
 
-@media (max-width: 1365px) {
+@media (max-width: 1023px) {
     body {
         display: none;
     }

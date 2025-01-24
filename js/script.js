@@ -2,7 +2,7 @@ console.log('Cảm ơn bạn đã ghé thăm trang web của meobeo! Chúc bạn
 console.log('Nếu có ý tưởng hay muốn đóng góp cho project vui lòng truy cập https://github.com/hoaphamduc/cutebooth');
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth < 1365) {
+    if (window.innerWidth < 1023) {
         alert('Website hiện tại chưa hỗ trợ trên các thiết bị di động. Các bạn vui lòng dùng trên PC :3 Mình cảm ơn!')
     }
 });
