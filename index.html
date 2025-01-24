@@ -51,218 +51,258 @@
 </head>
 
 <body>
-    <header>
-        <div class="address-bar">
-            <div class="language-dropdown">
-                <img src="/assets/images/world.svg" alt="Globe Icon" id="globe-icon" class="globe-icon">
-                <div class="language-menu" id="language-menu">
-                    <button class="lang-option" id="setLanguageVI" data-lang="vi">Tiếng Việt</button>
-                    <button class="lang-option" id="setLanguageEN" data-lang="en">English</button>
-                    <button class="lang-option" id="setLanguageZH" data-lang="zh">中国人</button>
-                </div>
-            </div>
+    <div id="mobile">
+        <span data-vi="Hiện tại trang web chưa hỗ trợ trên mobile. Các bạn vui lòng truy cập bằng máy tính nhé :3 Chúng mình cảm ơn!"
+        data-en="The website is not currently supported on mobile. Please access it using a computer :3 Thank you!"
+        data-zh="目前网站尚不支持移动端。请使用电脑访问哦 :3 谢谢大家!"></span>
+    </div>
 
-            <div class="address active" data-section-id="welcome">
-                <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
-                <span data-vi="Chào mừng | Cutebooth" data-en="Welcome | Cutebooth" data-zh="欢迎 | Cutebooth"></span>
-            </div>
-
-            <div class="address" data-section-id="select-template">
-                <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
-                <span data-vi="Chọn template" data-en="Choose template" data-zh="选择模板"></span>
-            </div>
-
-            <div class="address" data-section-id="upload-or-take-photos">
-                <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
-                <span data-vi="Thêm ảnh vào template" data-en="Add image to template" data-zh="将图片添加到模板"></span>
-            </div>
-
-            <div class="address" data-section-id="select-frame">
-                <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
-                <span data-vi="Chọn khung" data-en="Choose frame" data-zh="选择边框"></span>
-            </div>
-
-            <div class="address" data-section-id="preview-and-save">
-                <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
-                <span data-vi="Xem ảnh và lưu ảnh" data-en="View and save image" data-zh="查看并保存图片"></span>
-            </div>
-            
-            <div class="address" data-section-id="donate-us">
-                <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
-                <span data-vi="Ủng hộ chúng tớ" data-en="Support us" data-zh="支持我们"></span>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section id="welcome" class="active">
-            <div id="welcome-content">
-                <h1 data-vi="Chào mừng bạn đến với Cutebooth! Đây là trang web chụp Photobooth Online miễn phí dành cho các bạn ❤" data-en="Welcome to Cutebooth! This is a free online Photobooth website for you ❤" data-zh="欢迎来到 Cutebooth！这是一个免费的在线摄影亭网站，供您使用 ❤"></h1>
-                <button id="start-session">
-                    <span data-vi="Bắt đầu" data-en="Start" data-zh="开始"></span>
-                </button>
-            </div>
-        </section>
-    
-        <section id="select-template">
-            <h2 data-vi="Chọn template mà bạn muốn sử dụng" data-en="Choose the template you want to use" data-zh="选择您想要使用的模板"></h2>  
-            <div class="template-container">
-                <!-- Template Ảnh Dài (Photostrip, 3 ảnh) (600 x 1800 px) -->
-                <div class="photo-template">
-                    <div class="photo" id="template-3-photos">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
+    <div id="not-mobile">
+        <header>
+            <div class="address-bar">
+                <div class="language-dropdown">
+                    <img src="/assets/images/world.svg" alt="Globe Icon" id="globe-icon" class="globe-icon">
+                    <div class="language-menu" id="language-menu">
+                        <button class="lang-option" id="setLanguageVI" data-lang="vi">Tiếng Việt</button>
+                        <button class="lang-option" id="setLanguageEN" data-lang="en">English</button>
+                        <button class="lang-option" id="setLanguageZH" data-lang="zh">中国人</button>
                     </div>
                 </div>
     
-                <!-- Template Ảnh Dài (Photostrip, 4 ảnh) (600 x 1800 px) -->
-                <div class="photo-template">
-                    <div class="photo" id="template-4-photos">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
-                    </div>
+                <div class="address active" data-section-id="welcome">
+                    <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
+                    <span data-vi="Chào mừng | Cutebooth" data-en="Welcome | Cutebooth" data-zh="欢迎 | Cutebooth"></span>
                 </div>
     
-                <!-- Template Ảnh rộng (1200 x 1800 px) -->
-                <div class="photo-template">
-                    <div class="photo" id="template-4-photos-2">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-1">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-2">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-3">
-                        <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-4">
-                    </div>
+                <div class="address" data-section-id="select-template">
+                    <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
+                    <span data-vi="Chọn template" data-en="Choose template" data-zh="选择模板"></span>
+                </div>
+    
+                <div class="address" data-section-id="upload-or-take-photos">
+                    <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
+                    <span data-vi="Thêm ảnh vào template" data-en="Add image to template" data-zh="将图片添加到模板"></span>
+                </div>
+    
+                <div class="address" data-section-id="select-frame">
+                    <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
+                    <span data-vi="Chọn khung" data-en="Choose frame" data-zh="选择边框"></span>
+                </div>
+    
+                <div class="address" data-section-id="preview-and-save">
+                    <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
+                    <span data-vi="Xem ảnh và lưu ảnh" data-en="View and save image" data-zh="查看并保存图片"></span>
+                </div>
+                
+                <div class="address" data-section-id="donate-us">
+                    <img src="/assets/images/Bi.png" alt="Linh vật tên Bi">
+                    <span data-vi="Ủng hộ chúng tớ" data-en="Support us" data-zh="支持我们"></span>
                 </div>
             </div>
+        </header>
     
-        </section>
-    
-        <section id="upload-or-take-photos">
-            <div class="camera-container">
-                <div class="camera-container-column">
-                    <div id="selected-template-container">
-                        <span>
-                            <span data-vi="Bạn chưa chọn mẫu ảnh nào vui lòng chọn mẫu ảnh tại đây" data-en="You haven't selected any template. Please choose a template here" data-zh="您还没有选择任何模板，请在这里选择模板"></span> 
-                            <span class="span-btn" onclick="showSection('select-template')" data-vi="Nhấp vào tôi" data-en="Click me" data-zh="点击我"></span>
-                        </span>
-                        <!-- Template được chọn sẽ hiển thị tại đây -->
+        <main>
+            <section id="welcome" class="active">
+                <div id="welcome-content">
+                    <h1 data-vi="Chào mừng bạn đến với Cutebooth! Đây là trang web chụp Photobooth Online miễn phí dành cho các bạn ❤" data-en="Welcome to Cutebooth! This is a free online Photobooth website for you ❤" data-zh="欢迎来到 Cutebooth！这是一个免费的在线摄影亭网站，供您使用 ❤"></h1>
+                    <button id="start-session">
+                        <span data-vi="Bắt đầu" data-en="Start" data-zh="开始"></span>
+                    </button>
+                </div>
+            </section>
+        
+            <section id="select-template">
+                <h2 data-vi="Chọn template mà bạn muốn sử dụng" data-en="Choose the template you want to use" data-zh="选择您想要使用的模板"></h2>  
+                <div class="template-container">
+                    <!-- Template Ảnh Dài (Photostrip, 3 ảnh) (600 x 1800 px) -->
+                    <div class="photo-template">
+                        <div class="photo" id="template-3-photos">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 3 ảnh" class="img-template-3-photos">
+                        </div>
                     </div>
-                    <div class="flex-btn-container">
-                        <span data-vi="Đã thêm ảnh xong?" data-en="Is the image added?" data-zh="图片添加完成了吗？"></span>
-                        <button id="go-to-select-frame">
-                            <span data-vi="Chọn khung" data-en="Choose frame" data-zh="选择框架"></span>
-                        </button>
+        
+                    <!-- Template Ảnh Dài (Photostrip, 4 ảnh) (600 x 1800 px) -->
+                    <div class="photo-template">
+                        <div class="photo" id="template-4-photos">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh" class="img-template-4-photos">
+                        </div>
+                    </div>
+        
+                    <!-- Template Ảnh rộng (1200 x 1800 px) -->
+                    <div class="photo-template">
+                        <div class="photo" id="template-4-photos-2">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-1">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-2">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-3">
+                            <img src="/assets/images/placehoder.jpeg" alt="Ảnh placehoder template 4 ảnh (2 ảnh 1 dòng)" class="img-template-4-photos-2 img-4">
+                        </div>
                     </div>
                 </div>
-
-                <div class="camera-container-column" id="camera-preview">
-                    <!-- Video và nút đã được định nghĩa sẵn -->
-                    <video id="camera-video" autoplay playsinline></video>
-                    <div class="flex-btn-container">
-                        <button id="capture-button">
-                            <span data-vi="Chụp ảnh" data-en="Take photo" data-zh="拍照"></span>
-                        </button>
-                        <button id="upload-photo">
-                            <span data-vi="Tải ảnh lên" data-en="Upload image" data-zh="上传图片"></span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="camera-container-column">
-                    <h3 data-vi="Hàng đợi ảnh (tối đa: 12 ảnh). Nhấn vào ảnh trong hàng đợi để điền ảnh vào mẫu, bạn có thể nhấn thêm lần nữa để hủy chọn."
-                    data-en="Image queue (max: 12 images). Click on an image in the queue to add it to the template, you can click again to deselect."
-                    data-zh="图片队列（最多：12张图片）。点击队列中的图片将其添加到模板中，您可以再次点击以取消选择。"></h3>
-                    <div id="photo-queue">
-                        <!-- Preview of uploaded or taken photos -->
-                    </div>
-                </div>
-            </div>
-        </section>
-    
-        <section id="select-frame">
-            <div class="select-frame-container">
-                <div class="select-frame-column">
-                    <div id="template-need-select-frame"></div>
-                </div>
-
-                <div class="select-frame-column">
-                    <div class="frame-option-container">
-                        <div class="frame-options">
+        
+            </section>
+        
+            <section id="upload-or-take-photos">
+                <div class="camera-container">
+                    <div class="camera-container-column">
+                        <div id="selected-template-container">
                             <span>
-                                <span data-vi="Bạn chưa làm bước trước? Vui lòng thêm ảnh hoặc template tại đây"
-                                data-en="You haven't completed the previous step. Please add an image or template here"
-                                data-zh="您尚未完成前一步，请在这里添加图片或模板"></span> 
-                                <span class="span-btn" onclick="showSection('upload-or-take-photos')" data-vi="Nhấp vào tôi" data-en="Click me" data-zh="点击我"></span>
+                                <span data-vi="Bạn chưa chọn mẫu ảnh nào vui lòng chọn mẫu ảnh tại đây" data-en="You haven't selected any template. Please choose a template here" data-zh="您还没有选择任何模板，请在这里选择模板"></span> 
+                                <span class="span-btn" onclick="showSection('select-template')" data-vi="Nhấp vào tôi" data-en="Click me" data-zh="点击我"></span>
                             </span>
-                            <!-- Frames sẽ hiển thị tại đây -->
+                            <!-- Template được chọn sẽ hiển thị tại đây -->
+                        </div>
+                        <div class="flex-btn-container">
+                            <span data-vi="Đã thêm ảnh xong?" data-en="Is the image added?" data-zh="图片添加完成了吗？"></span>
+                            <button id="go-to-select-frame">
+                                <span data-vi="Chọn khung" data-en="Choose frame" data-zh="选择框架"></span>
+                            </button>
                         </div>
                     </div>
-
-                    <div class="filter-option-container">
-                        <div class="filter-options">
-                            <!-- Filters sẽ hiển thị tại đây -->
-                        </div>
-                    </div>
-                    
-                    <button id="go-to-preview-and-save">
-                        <span data-vi="Xem thành quả" data-en="View result" data-zh="查看结果"></span>
-                    </button>
-                </div>
-            </div>
-            
-            
-        </section>
     
-        <section id="preview-and-save">
-            <div class="preview-container">
-                <div class="preview-column">
-                    <!-- ad1 -->
-                    <ins class="adsbygoogle"
-                        style="display:inline-block;width:300px;height:250px"
-                        data-ad-client="ca-pub-8758740316724192"
-                        data-ad-slot="4721503355"></ins>
-                </div>
-
-                <div class="preview-column">
-                    <div id="photo-preview">
-                        <span data-vi="Bạn chưa có ảnh nào để lưu, hãy xem lại bước trước nhé"
-                        data-en="You don't have any images to save, please check the previous step"
-                        data-zh="您没有可保存的图片，请检查上一步"></span> 
-                        <span class="span-btn" onclick="showSection('select-frame')" data-vi="Nhấp vào tôi" data-en="Click me" data-zh="点击我"></span>
-                        <!-- Preview của ảnh sẽ được hiển thị tại đây -->
+                    <div class="camera-container-column" id="camera-preview">
+                        <!-- Video và nút đã được định nghĩa sẵn -->
+                        <video id="camera-video" autoplay playsinline></video>
+                        <div class="flex-btn-container">
+                            <button id="capture-button">
+                                <span data-vi="Chụp ảnh" data-en="Take photo" data-zh="拍照"></span>
+                            </button>
+                            <button id="upload-photo">
+                                <span data-vi="Tải ảnh lên" data-en="Upload image" data-zh="上传图片"></span>
+                            </button>
+                        </div>
                     </div>
-                    <button id="save-photo">
-                        <span data-vi="Lưu ảnh" data-en="Save image" data-zh="保存图片"></span>
-                    </button>
-                    <span data-vi="Nếu bạn cảm thấy thú vị, bạn có thể donate cho chúng tớ tại đây. Cảm ơn các bạn đã sử dụng Cutebooth ^^"
-                    data-en="If you find it interesting, you can donate to us here. Thank you for using Cutebooth ^^"
-                    data-zh="如果您觉得有趣，您可以在这里向我们捐赠。感谢您使用 Cutebooth ^^"></span>
-                    <button onclick="showSection('donate-us')">
-                        <span data-vi="Ủng hộ" data-en="Donate" data-zh="捐赠"></span>
-                    </button>
+    
+                    <div class="camera-container-column">
+                        <h3 data-vi="Hàng đợi ảnh (tối đa: 12 ảnh). Nhấn vào ảnh trong hàng đợi để điền ảnh vào mẫu, bạn có thể nhấn thêm lần nữa để hủy chọn."
+                        data-en="Image queue (max: 12 images). Click on an image in the queue to add it to the template, you can click again to deselect."
+                        data-zh="图片队列（最多：12张图片）。点击队列中的图片将其添加到模板中，您可以再次点击以取消选择。"></h3>
+                        <div id="photo-queue">
+                            <!-- Preview of uploaded or taken photos -->
+                        </div>
+                    </div>
                 </div>
-
-                <div class="preview-column">
-                    <!-- ad2 -->
-                    <ins class="adsbygoogle"
-                        style="display:inline-block;width:300px;height:250px"
+            </section>
+        
+            <section id="select-frame">
+                <div class="select-frame-container">
+                    <div class="select-frame-column">
+                        <div id="template-need-select-frame"></div>
+                    </div>
+    
+                    <div class="select-frame-column">
+                        <div class="frame-option-container">
+                            <div class="frame-options">
+                                <span>
+                                    <span data-vi="Bạn chưa làm bước trước? Vui lòng thêm ảnh hoặc template tại đây"
+                                    data-en="You haven't completed the previous step. Please add an image or template here"
+                                    data-zh="您尚未完成前一步，请在这里添加图片或模板"></span> 
+                                    <span class="span-btn" onclick="showSection('upload-or-take-photos')" data-vi="Nhấp vào tôi" data-en="Click me" data-zh="点击我"></span>
+                                </span>
+                                <!-- Frames sẽ hiển thị tại đây -->
+                            </div>
+                        </div>
+    
+                        <div class="filter-option-container">
+                            <div class="filter-options">
+                                <!-- Filters sẽ hiển thị tại đây -->
+                            </div>
+                        </div>
+                        
+                        <button id="go-to-preview-and-save">
+                            <span data-vi="Xem thành quả" data-en="View result" data-zh="查看结果"></span>
+                        </button>
+                    </div>
+                </div>
+                
+                
+            </section>
+        
+            <section id="preview-and-save">
+                <div class="preview-container">
+                    <div class="preview-column">
+                        <!-- ad1 -->
+                        <ins class="adsbygoogle"
+                            style="display:inline-block;width:300px;height:250px"
+                            data-ad-client="ca-pub-8758740316724192"
+                            data-ad-slot="4721503355"></ins>
+                    </div>
+    
+                    <div class="preview-column">
+                        <div id="photo-preview">
+                            <span data-vi="Bạn chưa có ảnh nào để lưu, hãy xem lại bước trước nhé"
+                            data-en="You don't have any images to save, please check the previous step"
+                            data-zh="您没有可保存的图片，请检查上一步"></span> 
+                            <span class="span-btn" onclick="showSection('select-frame')" data-vi="Nhấp vào tôi" data-en="Click me" data-zh="点击我"></span>
+                            <!-- Preview của ảnh sẽ được hiển thị tại đây -->
+                        </div>
+                    </div>
+    
+                    <div class="preview-column">
+                        <!-- ad2 -->
+                        <ins class="adsbygoogle"
+                            style="display:inline-block;width:300px;height:250px"
+                            data-ad-client="ca-pub-8758740316724192"
+                            data-ad-slot="3352876519"></ins>
+                        <button id="save-photo">
+                            <span data-vi="Lưu ảnh" data-en="Save image" data-zh="保存图片"></span>
+                        </button>
+                        <span style="font-size: 13px; user-select: none; cursor: default;"
+                        data-vi="Nếu bạn cảm thấy thú vị, bạn có thể ủng hộ và góp ý cho chúng tớ tại đây. Cảm ơn các bạn đã sử dụng Cutebooth ^^"
+                        data-en="If you find it interesting, you can support and give us feedback here. Thank you for using Cutebooth ^^"
+                        data-zh="如果您觉得有趣，可以在这里支持并给我们反馈。感谢您使用 Cutebooth ^^"></span>
+                        <button onclick="showSection('donate-us')">
+                            <span data-vi="Ủng hộ" data-en="Donate" data-zh="捐赠"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="donate-us">
+                <div class="preview-container">
+                    <div class="preview-column" id="feedback">
+                        <span data-vi="Các bạn góp ý để chúng mình cải thiện sản phẩm hoặc đóng góp thêm frame cho chúng mình qua email này nhé :3"
+                        data-en="Please send us your feedback to improve the product or contribute more frames via this email :3"
+                        data-zh="请通过此邮箱向我们提供反馈，以改进产品或贡献更多边框 :3"></span>
+                        <a href="mailto:hoaphamduc2399@gmail.com" data-vi="Email này nè" data-en="This email" data-zh="这个邮箱"></a>
+                        <span data-vi="Dưới đây là các mẫu frame để cho bạn sáng tạo. Các bạn nhấn vào để tải xuống và vẽ nhé :3 Sau đó có thể gửi cho mình qua email trên để mình thêm vào trang web"
+                        data-en="Here are some frame templates for you to get creative. Click to download and draw :3 Then you can send them to me via the email above so I can add them to the website."
+                        data-zh="以下是一些供您创作的边框模板。点击下载并绘制吧 :3 然后您可以通过上面的邮箱发送给我，我会将其添加到网站上。"></span>
+                        <div class="frame-template-download">
+                            <span class="download-frame" onclick="downloadFrameTemplate('/template/3-photos.png');" data-vi="Mẫu 3 ảnh" data-en="3-photo template" data-zh="三张图片模板"></span>
+                            <span class="download-frame" onclick="downloadFrameTemplate('/template/4-photos.png');" data-vi="Mẫu 4 ảnh" data-en="4-photo template" data-zh="四张图片模板"></span>
+                            <span class="download-frame" onclick="downloadFrameTemplate('/template/4-photos-2-lines.png');" data-vi="Mẫu 4 ảnh (2 ảnh mỗi cột)" data-en="4-photo template (2 photos per column)" data-zh="四张图片模板（每列2张）"></span>
+                        </div>
+                    </div>
+    
+                    <div class="preview-column">
+                        <h2 data-vi="Ủng hộ chúng tớ" data-en="Support us" data-zh="支持我们"></h2>
+                        <span style="display: block; width: 100%; text-align: center; font-size: 15px; margin-top: 10px; color: #333; user-select: none;"
+                        data-vi="Rất cảm ơn nếu các cậu ủng hộ mình 1 bát mỳ trứng và 1 cốc Sting :3"
+                        data-en="I would really appreciate it if you could support me with a bowl of egg noodles and a cup of Sting :3"
+                        data-zh="如果您能支持我一碗鸡蛋面和一杯Sting，我将非常感激 :3"></span>
+                        <img src="/assets/images/qr.jpg" alt="QR của meobeo" id="my-qr">
+                    </div>
+    
+                    <div class="preview-column">
+                        <ins class="adsbygoogle"
+                        style="display:block;width:300px;height:250px"
                         data-ad-client="ca-pub-8758740316724192"
-                        data-ad-slot="3352876519"></ins>
+                        data-ad-slot="6040122757"></ins>
+                        <ins class="adsbygoogle"
+                        style="display:block;width:300px;height:250px"
+                        data-ad-client="ca-pub-8758740316724192"
+                        data-ad-slot="8117822883"></ins>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="donate-us">
-            <h2 data-vi="Ủng hộ chúng tớ" data-en="Support us" data-zh="支持我们"></h2>
-            <span style="display: block; width: 100%; text-align: center; font-size: 15px; margin-top: 10px; color: #333; user-select: none;"
-            data-vi="Rất cảm ơn nếu các cậu ủng hộ mình 1 bát mỳ trứng và 1 cốc Sting :3"
-            data-en="I would really appreciate it if you could support me with a bowl of egg noodles and a cup of Sting :3"
-            data-zh="如果您能支持我一碗鸡蛋面和一杯Sting，我将非常感激 :3"></span>
-            <img src="/assets/images/qr.jpg" alt="QR của meobeo" id="my-qr">
-        </section>
-    </main>
+                
+            </section>
+        </main>
+    </div>
 </body>
 
 <script src="js/script.js"></script>

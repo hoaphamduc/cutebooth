@@ -525,6 +525,30 @@ document.getElementById("save-photo").addEventListener("click", function () {
         });
 });
 
+// Hàm tải frame template
+function downloadFrameTemplate(url) {
+    // Kiểm tra xem URL có hợp lệ không
+    if (!url || typeof url !== 'string') {
+        console.error("URL không hợp lệ. Vui lòng cung cấp một URL hợp lệ.");
+        return;
+    }
+
+    // Tạo một thẻ <a> để kích hoạt download
+    const link = document.createElement('a');
+    link.href = url;
+
+    // Lấy tên tệp từ URL (nếu có)
+    const fileName = url.substring(url.lastIndexOf('/') + 1);
+    link.download = fileName || 'downloaded_file';
+
+    // Thêm thẻ <a> vào DOM, kích hoạt click, và xóa thẻ sau khi tải xong
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    console.log(`Đã tải xuống tệp từ URL: ${url}`);
+}
+
 // Lấy frame dựa trên loại template
 function getFramesByTemplateType(templateType) {
     const framesData = {
