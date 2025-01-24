@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
             confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
         });
     }
+
+    setTimeout(function() {
+        document.getElementById('loader').style.display = 'none';
+    }, 2399);
 });
 
 // Hàm để thay đổi ngôn ngữ
