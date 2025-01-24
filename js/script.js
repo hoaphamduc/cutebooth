@@ -376,6 +376,12 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
         return;
     }
 
+    // **BẮT ĐẦU: XÓA HÀNG ĐỢI ẢNH**
+    photoQueue.innerHTML = ""; // Xóa tất cả các ảnh trong hàng đợi
+    photoCount = 0; // Reset số lượng ảnh
+    filledSlots = []; // Reset danh sách các slot đã điền
+    // **KẾT THÚC: XÓA HÀNG ĐỢI ẢNH**
+
     // Hiển thị template đang được edit trong section select-frame
     const selectFrameContainer = document.getElementById('template-need-select-frame');
     const frameContainer = document.querySelector(".frame-options");
