@@ -10,17 +10,33 @@
 
 body {
     height: 100dvh;
+    background-color: #b6e8f3;
+}
+
+main {
+    width: 100%;
+    float: 1;
+    height: calc(100% - 40px);
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
 }
 
 section {
-    min-height: 100%;
+    height: 100%;
     width: 100%;
     position: relative;
     background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
-    padding: 50px 100px;
+    padding: 20px;
+    display: none;
+}
+
+section.active {
+    display: block;
 }
 
 button {
+    display: block;
     padding: 0.1em 0.25em;
     width: 13em;
     height: 4.2em;
@@ -45,6 +61,7 @@ button span {
     color: #fff;
     border: 0.08em solid #fff;
     box-shadow: 0 0.4em 0.1em 0.019em #fff;
+    user-select: none;
 }
 
 button span:hover {
@@ -57,18 +74,25 @@ button span:not(hover) {
     transition: all 1s;
 }
 
+h1,
+h2,
+h3 {
+    user-select: none;
+    pointer-events: none;
+}
+
 h1 {
     cursor: default;
 }
 
 h2 {
-    font-size: 28px;
+    font-size: 25px;
     text-align: center;
     cursor: default;
 }
 
 h3 {
-    font-size: 22px;
+    font-size: 19px;
     cursor: default;
 }
 
@@ -86,17 +110,22 @@ h3 {
 
 /* Chào mừng */
 
-#welcome {
+#welcome-content {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
-    gap: 50px;
 }
 
 #welcome h1 {
     font-size: 32px;
     text-align: center;
+}
+
+#start-session {
+    margin-top: 100px;
 }
 
 /* End Chào mừng */
@@ -107,9 +136,9 @@ h3 {
     position: relative;
     width: fit-content;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 50px;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 100px;
 }
 
 .photo-template {
@@ -126,17 +155,35 @@ h3 {
 
 /* Thêm ảnh vào mẫu */
 
+.camera-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+    gap: 20px;
+}
+
+.camera-container-column {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .flex-btn-container {
     margin-top: auto;
     display: flex;
     gap: 10px;
     justify-content: center;
     align-items: center;
+    margin-top: 15px;
 }
 
 #selected-template-container {
-    width: 300px;
-    height: 480px;
+    width: 100%;
+    flex: 1;
     border: 1px solid #000;
     position: relative;
     display: flex;
@@ -147,32 +194,25 @@ h3 {
     text-align: center;
 }
 
-#camera-preview {
-    height: 550px;
-    min-width: 300px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-}
-
 video {
     max-width: 100%;
     height: auto;
     max-height: 480px;
     border-radius: 15px;
+    border: 1px solid #000;
 }
 
 #photo-queue {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    flex: 1;
     gap: 10px;
     margin-top: 15px;
     border: 2px dashed #ccc;
     padding: 10px;
-    background-color: #f9f9f9;
+    background-color: #fff;
     min-height: 124px;
     width: 100%;
     border-radius: 15px;
@@ -218,9 +258,27 @@ video {
 
 /* Chọn Frame */
 
+.select-frame-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.select-frame-column {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+
 #template-need-select-frame {
-    width: 300px;
-    height: 480px;
+    width: 100%;
+    height: 100%;
     border: 1px solid #000;
     position: relative;
     display: flex;
@@ -231,11 +289,17 @@ video {
     text-align: center;
 }
 
+.frame-option-container {
+    width: 100%;
+    height: 220px;
+    padding: 15px;
+    overflow: auto;
+    border: 1px solid #000;
+}
+
 .frame-options {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-    margin-top: 20px;
     position: relative;
 }
 
@@ -255,7 +319,7 @@ video {
     height: 100%;
     background-size: cover;
     background-position: center;
-    z-index: 1;
+    z-index: 100;
     pointer-events: none;
     background-color: transparent;
 }
@@ -273,17 +337,94 @@ video {
     border: 2px solid #007bff;
 }
 
+#filter-preview {
+    pointer-events: none;
+    z-index: 99;
+    filter: grayscale(1);
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: transparent;
+}
+
+.filter-option-container {
+    width: 100%;
+    height: 220px;
+    overflow: auto;
+    padding: 5px;
+}
+
+.filter-options {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    text-align: center;
+    line-height: 100px;
+    font-size: 14px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    background: url(/assets/images/placehoder.jpeg) no-repeat center;
+    object-fit: cover;
+    color: #fff;
+    font-weight: 700;
+    transition: .3s ease-in-out;
+}
+
+.filter:hover {
+    transform: scale(1.02);
+}
+
 /* End Chọn Frame */
 
 /* Xem trước và lưu ảnh */
 
+.preview-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.preview-column {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 /* End Xem trước và lưu ảnh */
 
-@media (max-width: 768px) {
+/* Donte */
+
+#my-qr {
+    height: 400px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+/* End donate */
+
+@media (max-width: 1365px) {
     body {
         display: none;
     }
-    
+
     section {
         padding: 30px 10px;
     }

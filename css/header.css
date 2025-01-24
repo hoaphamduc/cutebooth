@@ -1,0 +1,150 @@
+header {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    padding: 0 5px;
+}
+
+.address-bar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    align-items: center;
+}
+
+.address {
+    background-color: transparent;
+    height: 100%;
+    width: 200px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    border-radius: 10px;
+    position: relative;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.address::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 2px;
+    background-color: #fff;
+    transition: height 0.3s ease, background-color 0.3s ease;
+    right: 0;
+}
+
+.address:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.address:hover::after {
+    height: 0;
+}
+
+.address.active {
+    background-color: #fff;
+}
+
+.address.active::after {
+    display: none;
+}
+
+.address img {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1/1;
+    border: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.address span {
+    font-size: 13px;
+    line-height: 21px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    user-select: none;
+    pointer-events: none;
+    font-weight: 500;
+}
+
+.info-btn {
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.info-btn svg {
+    fill: rgba(0, 0, 0, 1);
+    width: 24px;
+    height: 24px;
+}
+
+.language-dropdown {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.globe-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: none !important;
+    user-select: unset !important;
+    pointer-events: unset !important;
+}
+
+.language-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+    z-index: 1000;
+}
+
+.language-menu button {
+    display: block;
+    padding: 10px 20px;
+    width: 100%;
+    height: fit-content;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: black;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.language-menu button:hover {
+    background-color: #f4f4f4;
+}
+
+.language-menu button.active {
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+.language-dropdown.active .language-menu {
+    display: block;
+}
