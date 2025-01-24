@@ -43,7 +43,7 @@ section.active {
     display: block;
 }
 
-button {
+.custom-button {
     display: block;
     padding: 0.1em 0.25em;
     width: 13em;
@@ -55,7 +55,7 @@ button {
     cursor: pointer;
 }
 
-button span {
+.custom-button span {
     position: relative;
     display: flex;
     justify-content: center;
@@ -72,13 +72,13 @@ button span {
     user-select: none;
 }
 
-button span:hover {
+.custom-button span:hover {
     transition: all 0.5s;
     transform: translate(0, 0.4em);
     box-shadow: 0 0 0 0 #fff;
 }
 
-button span:not(hover) {
+.custom-button span:not(hover) {
     transition: all 1s;
 }
 

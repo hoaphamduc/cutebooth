@@ -1,9 +1,16 @@
 console.log('Cảm ơn bạn đã ghé thăm trang web của meobeo! Chúc bạn vui vẻ! Mọi thông tin chi tiết vui lòng liên hệ https://meobeo.dev');
 console.log('Nếu có ý tưởng hay muốn đóng góp cho project vui lòng truy cập https://github.com/hoaphamduc/cutebooth');
 
+const mobileWidth = 1023;
+
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth < 1023) {
-        alert('Website hiện tại chưa hỗ trợ trên các thiết bị di động. Các bạn vui lòng dùng trên PC :3 Mình cảm ơn!')
+    if (window.innerWidth < mobileWidth) {
+        Swal.fire({
+            title: '<span data-vi="Thông Báo" data-en="Notification" data-zh="通知"></span>',
+            html: '<span data-vi="Website hiện tại chưa hỗ trợ trên các thiết bị di động. Các bạn vui lòng dùng trên PC :3 Mình cảm ơn!" data-en="The website is not currently supported on mobile devices. Please use it on a PC :3 Thank you!" data-zh="目前网站尚不支持移动设备。请在PC上使用哦 :3 谢谢!"></span>',
+            icon: 'warning',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
     }
 });
 
@@ -78,19 +85,18 @@ setLanguage(savedLanguage);
 observeLanguageElements(savedLanguage);
 
 document.getElementById('setLanguageVI').addEventListener('click', () => {
-    setLanguage('vi')
-})
+    setLanguage('vi');
+});
 
 document.getElementById('setLanguageEN').addEventListener('click', () => {
-    setLanguage('en')
-})
+    setLanguage('en');
+});
 
 document.getElementById('setLanguageZH').addEventListener('click', () => {
-    setLanguage('zh')
-})
+    setLanguage('zh');
+});
 
 // Hàm mở section
-
 function showSection(sectionId) {
     // Ẩn tất cả các section
     document.querySelectorAll("main section").forEach(section => {
@@ -134,7 +140,6 @@ addresses.forEach(address => {
 document.getElementById("start-session").addEventListener("click", () => showSection("select-template"));
 
 // Thêm ảnh vào queue để xếp
-
 const MAX_PHOTOS = 12; // Giới hạn số ảnh trong queue
 const photoQueue = document.getElementById("photo-queue");
 const cameraPreview = document.getElementById("camera-preview");
@@ -148,7 +153,12 @@ function addPhotoToQueue(photoUrl) {
     if (!photoUrl) return;
 
     if (photoQueue.children.length >= MAX_PHOTOS) {
-        alert("Hàng đợi đã đầy ảnh, vui lòng sử dụng ảnh ở hàng đợi hoặc xóa bớt để thêm ảnh!");
+        Swal.fire({
+            title: '<span data-vi="Hàng Đợi Đầy" data-en="Queue is Full" data-zh="队列已满"></span>',
+            html: '<span data-vi="Hàng đợi đã đầy ảnh, vui lòng sử dụng ảnh ở hàng đợi hoặc xóa bớt để thêm ảnh!" data-en="The image queue is full, please use the images in the queue or delete some to add more images!" data-zh="图片队列已满，请使用队列中的图片或删除一些以添加更多图片！"></span>',
+            icon: 'error',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -197,7 +207,6 @@ function addPhotoToQueue(photoUrl) {
 }
 
 // Xử lý chọn ảnh
-
 document.getElementById("upload-photo").addEventListener("click", function () {
     const fileInput = document.createElement("input");
     fileInput.type = "file";
@@ -256,7 +265,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch((err) => {
-            // alert("Không thể truy cập vào máy ảnh: " + err.message + ". Vui lòng kiểm tra cài đặt trình duyệt và máy ảnh của bạn!");
+            if (window.innerWidth >= mobileWidth) {
+                Swal.fire({
+                    title: '<span data-vi="Lỗi Camera" data-en="Camera Error" data-zh="相机错误"></span>',
+                    html: `<span data-vi="Không thể truy cập vào máy ảnh:" data-en="Unable to access the camera:" data-zh="无法访问相机："></span> ${err.message}. <span data-vi="Vui lòng kiểm tra cài đặt trình duyệt và máy ảnh của bạn!" data-en="Please check your browser and camera settings!" data-zh="请检查您的浏览器和相机设置！"></span>`,
+                    icon: 'error',
+                    confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+                });
+            }
         });
 });
 
@@ -278,20 +294,25 @@ document.querySelectorAll(".photo-template").forEach((template) => {
 
         // Hiển thị template đã chọn
         const templateContainer = document.getElementById("selected-template-container");
-        templateContainer.innerHTML = ""; // Xóa template trước đó nếu có
+        templateContainer.innerHTML = "";
         templateContainer.appendChild(selectedTemplate);
 
         // Reset trạng thái các slot
         filledSlots = Array.from(selectedTemplate.querySelectorAll("img")).map(() => null);
 
-        showSection("upload-or-take-photos")
+        showSection("upload-or-take-photos");
     });
 });
 
 // Điền ảnh vào template
 function fillTemplateWithImage(photoUrl) {
     if (!selectedTemplate) {
-        alert("Vui lòng chọn một mẫu trước đã bro.");
+        Swal.fire({
+            title: '<span data-vi="Chưa Chọn Mẫu" data-en="Template Not Selected" data-zh="未选择模板"></span>',
+            html: '<span data-vi="Vui lòng chọn một mẫu trước đã bro." data-en="Please choose a template first, bro." data-zh="请先选择一个模板，兄弟。"></span>',
+            icon: 'warning',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return false;
     }
 
@@ -303,7 +324,12 @@ function fillTemplateWithImage(photoUrl) {
             return true;
         }
     }
-    alert("Tất cả các vị trí trong mẫu đã được lấp đầy!");
+    Swal.fire({
+        title: '<span data-vi="Slot Đầy" data-en="Slot Full" data-zh="插槽已满"></span>',
+        html: '<span data-vi="Tất cả các vị trí trong mẫu đã được lấp đầy!" data-en="All positions in the template are filled!" data-zh="模板中的所有位置已被填满！"></span>',
+        icon: 'info',
+        confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+    });
     return false;
 }
 
@@ -314,7 +340,7 @@ function clearImageFromTemplate(photoUrl) {
     const imgPlaceholders = selectedTemplate.querySelectorAll("img");
     for (let i = 0; i < imgPlaceholders.length; i++) {
         if (filledSlots[i] === photoUrl) {
-            imgPlaceholders[i].src = "/assets/images/placehoder.jpeg"; // Khôi phục placeholder
+            imgPlaceholders[i].src = "/assets/images/placehoder.jpeg";
             filledSlots[i] = null; // Xóa trạng thái slot
             return true;
         }
@@ -325,7 +351,12 @@ function clearImageFromTemplate(photoUrl) {
 document.getElementById("go-to-select-frame").addEventListener("click", function () {
     // Kiểm tra nếu template đã được chọn
     if (!selectedTemplate) {
-        alert("Vui lòng chọn một mẫu trước đã bro.");
+        Swal.fire({
+            title: '<span data-vi="Chưa Chọn Mẫu" data-en="Template Not Selected" data-zh="未选择模板"></span>',
+            html: '<span data-vi="Vui lòng chọn một mẫu trước đã bro." data-en="Please choose a template first, bro." data-zh="请先选择一个模板，兄弟。"></span>',
+            icon: 'warning',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -336,7 +367,12 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
     );
 
     if (!allSlotsFilled) {
-        alert("Vui lòng chọn ảnh cho tất cả các vị trí trong mẫu trước khi tiếp tục.");
+        Swal.fire({
+            title: '<span data-vi="Chưa Đủ Ảnh" data-en="Not Enough Images" data-zh="图片不足"></span>',
+            html: '<span data-vi="Vui lòng chọn ảnh cho tất cả các vị trí trong mẫu trước khi tiếp tục." data-en="Please select images for all positions in the template before continuing." data-zh="请在继续之前为模板中的所有位置选择图片。"></span>',
+            icon: 'warning',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -366,7 +402,12 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
             selectFrameContainer.insertAdjacentElement("afterbegin", targetPhoto);
         }
     } else {
-        alert("Không tìm thấy vùng chứa ảnh hợp lệ trong mẫu đã chọn.");
+        Swal.fire({
+            title: '<span data-vi="Lỗi" data-en="Error" data-zh="错误"></span>',
+            html: '<span data-vi="Không tìm thấy vùng chứa ảnh hợp lệ trong mẫu đã chọn." data-en="No valid image container found in the selected template." data-zh="在所选模板中未找到有效的图片容器。"></span>',
+            icon: 'error',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -431,7 +472,6 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
     showSection("select-frame");
 });
 
-
 document.getElementById("go-to-preview-and-save").addEventListener("click", function () {
     // Kiểm tra nếu frame đã được chọn (nếu có yêu cầu)
     const framePreview = document.getElementById("frame-preview");
@@ -441,7 +481,12 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
     }
 
     if (!selectedTemplate) {
-        alert("Chưa có mẫu nào được chọn!");
+        Swal.fire({
+            title: '<span data-vi="Chưa Chọn Mẫu" data-en="Template Not Selected" data-zh="未选择模板"></span>',
+            html: '<span data-vi="Chưa có mẫu nào được chọn!" data-en="No template selected!" data-zh="没有选择模板！"></span>',
+            icon: 'warning',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -452,7 +497,12 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
     );
 
     if (!allSlotsFilled) {
-        alert("Vui lòng chọn ảnh cho tất cả các vị trí trong mẫu trước khi tiếp tục.");
+        Swal.fire({
+            title: '<span data-vi="Chưa Đủ Ảnh" data-en="Not Enough Images" data-zh="图片不足"></span>',
+            html: '<span data-vi="Vui lòng chọn ảnh cho tất cả các vị trí trong mẫu trước khi tiếp tục." data-en="Please select images for all positions in the template before continuing." data-zh="请在继续之前为模板中的所有位置选择图片。"></span>',
+            icon: 'warning',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -460,7 +510,12 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
     const selectFrameSection = document.getElementById("select-frame");
     const photoDiv = selectFrameSection.querySelector(".photo");
     if (!photoDiv) {
-        alert("Không tìm thấy vùng chứa ảnh nào trong khung chọn.");
+        Swal.fire({
+            title: '<span data-vi="Lỗi" data-en="Error" data-zh="错误"></span>',
+            html: '<span data-vi="Không tìm thấy vùng chứa ảnh nào trong khung chọn." data-en="No image container found in the selected frame." data-zh="在选择的框架中找不到图片容器。"></span>',
+            icon: 'error',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -483,7 +538,12 @@ document.getElementById("save-photo").addEventListener("click", function () {
     const photoPreview = document.querySelector(".photo-preview");
 
     if (!photoPreview) {
-        alert("Không tìm thấy bản xem trước ảnh nào để lưu!");
+        Swal.fire({
+            title: '<span data-vi="Lỗi" data-en="Error" data-zh="错误"></span>',
+            html: '<span data-vi="Không tìm thấy bản xem trước ảnh nào để lưu!" data-en="No preview image found to save!" data-zh="找不到可以保存的图片预览！"></span>',
+            icon: 'error',
+            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+        });
         return;
     }
 
@@ -521,7 +581,12 @@ document.getElementById("save-photo").addEventListener("click", function () {
             // Xóa container tạm thời trong trường hợp lỗi
             document.body.removeChild(tempContainer);
             console.error("Lỗi tạo hình ảnh:", error);
-            alert("Đã xảy ra lỗi khi tải ảnh.");
+            Swal.fire({
+                title: '<span data-vi="Lỗi" data-en="Error" data-zh="错误"></span>',
+                html: '<span data-vi="Đã xảy ra lỗi khi tải ảnh." data-en="An error occurred while uploading the image." data-zh="上传图片时发生错误。"></span>',
+                icon: 'error',
+                confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+            });
         });
 });
 
