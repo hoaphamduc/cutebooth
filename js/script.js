@@ -639,9 +639,10 @@ function getFramesByTemplateType(templateType) {
             { id: 2, src: "/assets/frame/4-photos-2/frame-1.png" },
             { id: 3, src: "/assets/frame/4-photos-2/frame-2.png" },
             { id: 4, src: "/assets/frame/4-photos-2/frame-3.png" },
-            { id: 5, src: "/assets/frame/4-photos-2/frame-4.png" },
-            { id: 6, src: "/assets/frame/4-photos-2/frame-5.png" },
-            { id: 7, src: "/assets/frame/4-photos-2/frame-6.png" },
+            // { id: 5, src: "/assets/frame/4-photos-2/frame-4.png" },
+            // { id: 6, src: "/assets/frame/4-photos-2/frame-5.png" },
+            // { id: 7, src: "/assets/frame/4-photos-2/frame-6.png" },
+            { id: 8, src: "/assets/frame/4-photos-2/frame-1.svg" },
         ],
     };
 
