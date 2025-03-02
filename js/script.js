@@ -255,6 +255,8 @@ document.addEventListener("DOMContentLoaded", function () {
             video.srcObject = stream;
             video.play();
 
+            video.style.transform = "scaleX(-1)";
+
             // Xử lý chụp ảnh khi bấm nút
             captureButton.addEventListener("click", function () {
                 const canvas = document.createElement("canvas");
