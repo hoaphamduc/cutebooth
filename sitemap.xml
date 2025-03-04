@@ -1,50 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <!-- Trang chủ -->
     <url>
         <loc>https://cutebooth.netlify.app/</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-03-03</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-    </url>
-
-    <!-- Phần Welcome -->
-    <url>
-        <loc>https://cutebooth.netlify.app/#welcome</loc>
-        <lastmod>2025-01-23</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-
-    <!-- Phần Chọn mẫu ảnh -->
-    <url>
-        <loc>https://cutebooth.netlify.app/#select-template</loc>
-        <lastmod>2025-01-23</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Phần Tải ảnh lên -->
-    <url>
-        <loc>https://cutebooth.netlify.app/#upload-or-take-photos</loc>
-        <lastmod>2025-01-23</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Phần Chọn khung -->
-    <url>
-        <loc>https://cutebooth.netlify.app/#select-frame</loc>
-        <lastmod>2025-01-23</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <!-- Phần Xem trước và lưu -->
-    <url>
-        <loc>https://cutebooth.netlify.app/#preview-and-save</loc>
-        <lastmod>2025-01-23</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
     </url>
 </urlset>

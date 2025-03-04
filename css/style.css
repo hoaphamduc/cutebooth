@@ -30,6 +30,12 @@ main {
     overflow: hidden;
 }
 
+.custom-text-color {
+    background: linear-gradient(to right, #247afe, #e1597d);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 section {
     height: 100%;
     width: 100%;
@@ -721,11 +727,11 @@ video {
         height: fit-content;
     }
 
-    #not-mobile {
+    /* #not-mobile {
         display: none;
-    }
+    } */
 
-    #mobile {
+    /* #mobile {
         display: flex !important;
         width: 100%;
         height: 100dvh;
@@ -734,5 +740,5 @@ video {
         align-items: center;
         padding: 20px;
         text-align: center;
-    }
+    } */
 }

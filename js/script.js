@@ -4,14 +4,14 @@ console.log('Nếu có ý tưởng hay muốn đóng góp cho project vui lòng 
 const mobileWidth = 1023;
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth < mobileWidth) {
-        Swal.fire({
-            title: '<span data-vi="Thông Báo" data-en="Notification" data-zh="通知"></span>',
-            html: '<span data-vi="Website hiện tại chưa hỗ trợ trên các thiết bị di động. Các bạn vui lòng dùng trên PC :3 Mình cảm ơn!" data-en="The website is not currently supported on mobile devices. Please use it on a PC :3 Thank you!" data-zh="目前网站尚不支持移动设备。请在PC上使用哦 :3 谢谢!"></span>',
-            icon: 'warning',
-            confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
-        });
-    }
+    // if (window.innerWidth < mobileWidth) {
+    //     Swal.fire({
+    //         title: '<span data-vi="Thông Báo" data-en="Notification" data-zh="通知"></span>',
+    //         html: '<span data-vi="Website hiện tại chưa hỗ trợ trên các thiết bị di động. Các bạn vui lòng dùng trên PC :3 Mình cảm ơn!" data-en="The website is not currently supported on mobile devices. Please use it on a PC :3 Thank you!" data-zh="目前网站尚不支持移动设备。请在PC上使用哦 :3 谢谢!"></span>',
+    //         icon: 'warning',
+    //         confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+    //     });
+    // }
 
     setTimeout(function() {
         document.getElementById('loader').style.display = 'none';
@@ -569,7 +569,7 @@ document.getElementById("save-photo").addEventListener("click", function () {
     // Tạo một container tạm thời và thêm bản clone vào DOM
     const tempContainer = document.createElement("div");
     tempContainer.style.position = "absolute";
-    tempContainer.style.top = "-9999px"; // Đặt ngoài màn hình
+    tempContainer.style.top = "-9999px";
     tempContainer.style.left = "-9999px";
     tempContainer.appendChild(photoClone);
     document.body.appendChild(tempContainer);
@@ -580,17 +580,28 @@ document.getElementById("save-photo").addEventListener("click", function () {
             // Xóa container tạm thời sau khi tạo ảnh
             document.body.removeChild(tempContainer);
 
-            // Tạo một thẻ <a> để tải ảnh xuống
-            const downloadLink = document.createElement("a");
-            downloadLink.href = dataUrl;
-            downloadLink.download = "cutebooth.png"; // Tên file tải xuống
-
-            // Kích hoạt sự kiện nhấp chuột vào thẻ <a> để tải file
-            downloadLink.click();
-
+            // Kiểm tra nếu đang chạy trên iOS
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIOS) {
+                // Mở ảnh trong tab mới để người dùng nhấn giữ lưu ảnh
+                window.open(dataUrl, '_blank');
+                Swal.fire({
+                    title: '<span data-vi="Lưu Ảnh" data-en="Save Image" data-zh="保存图片"></span>',
+                    html: '<span data-vi="Trên iOS, vui lòng nhấn và giữ hình ảnh trong tab mới để lưu vào thiết bị của bạn." data-en="On iOS, please press and hold the image in the new tab to save it to your device." data-zh="在iOS上，请在新标签页中长按图片以保存到您的设备。"></span>',
+                    icon: 'info',
+                    confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+                });
+            } else {
+                // Tạo thẻ <a> để tải ảnh xuống (cho trình duyệt khác)
+                const downloadLink = document.createElement("a");
+                downloadLink.href = dataUrl;
+                downloadLink.download = "cutebooth.png";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
         })
         .catch(function (error) {
-            // Xóa container tạm thời trong trường hợp lỗi
             document.body.removeChild(tempContainer);
             console.error("Lỗi tạo hình ảnh:", error);
             Swal.fire({
