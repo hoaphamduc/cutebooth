@@ -243,10 +243,24 @@ document.getElementById("upload-photo").addEventListener("click", function () {
     document.body.removeChild(fileInput);
 });
 
+let flipCamera = true;
+
 // Xử lý chụp ảnh
 document.addEventListener("DOMContentLoaded", function () {
     const video = document.getElementById("camera-video");
     const captureButton = document.getElementById("capture-button");
+    const flipToggle = document.getElementById("flip-toggle");
+
+    // Hàm cập nhật transform cho video
+    function updateVideoTransform() {
+        video.style.transform = flipCamera ? "scaleX(-1)" : "none";
+    }
+
+    // Khi tùy chọn flip được thay đổi
+    flipToggle.addEventListener("change", function () {
+        flipCamera = this.checked;
+        updateVideoTransform();
+    });
 
     // Mở camera khi trang web được tải
     navigator.mediaDevices
@@ -254,16 +268,22 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((stream) => {
             video.srcObject = stream;
             video.play();
-
-            video.style.transform = "scaleX(-1)";
+            // Áp dụng transform theo trạng thái ban đầu
+            updateVideoTransform();
 
             // Xử lý chụp ảnh khi bấm nút
             captureButton.addEventListener("click", function () {
                 const canvas = document.createElement("canvas");
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
-
                 const context = canvas.getContext("2d");
+
+                // Nếu flipCamera = true, vẽ ảnh với transform lật ngang
+                if (flipCamera) {
+                    context.translate(canvas.width, 0);
+                    context.scale(-1, 1);
+                }
+                // Vẽ video lên canvas
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
                 const photoUrl = canvas.toDataURL("image/png");
@@ -642,6 +662,8 @@ function getFramesByTemplateType(templateType) {
     const framesData = {
         "template-3-photos": [
             { id: 1, src: "/assets/frame/3-photos/no-frame.png" },
+            { id: 2, src: "/assets/frame/3-photos/1.svg" },
+            { id: 3, src: "/assets/frame/3-photos/2.svg" },
         ],
         "template-4-photos": [
             { id: 1, src: "/assets/frame/4-photos/no-frame.png" },
