@@ -669,6 +669,8 @@ function getFramesByTemplateType(templateType) {
         "template-4-photos": [
             { id: 1, src: "/assets/frame/4-photos/no-frame.png" },
             { id: 2, src: "/assets/frame/4-photos/frame-1.png" },
+            { id: 3, src: "/assets/frame/4-photos/1.svg" },
+            { id: 4, src: "/assets/frame/4-photos/2.svg" },
         ],
         "template-4-photos-2": [
             { id: 1, src: "/assets/frame/4-photos-2/no-frame.png" },
