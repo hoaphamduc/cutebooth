@@ -664,6 +664,7 @@ function getFramesByTemplateType(templateType) {
             { id: 1, src: "/assets/frame/3-photos/no-frame.png" },
             { id: 2, src: "/assets/frame/3-photos/1.svg" },
             { id: 3, src: "/assets/frame/3-photos/2.svg" },
+            { id: 4, src: "/assets/frame/3-photos/3.svg" },
         ],
         "template-4-photos": [
             { id: 1, src: "/assets/frame/4-photos/no-frame.png" },
@@ -677,7 +678,11 @@ function getFramesByTemplateType(templateType) {
             // { id: 5, src: "/assets/frame/4-photos-2/frame-4.png" },
             // { id: 6, src: "/assets/frame/4-photos-2/frame-5.png" },
             // { id: 7, src: "/assets/frame/4-photos-2/frame-6.png" },
-            { id: 8, src: "/assets/frame/4-photos-2/frame-1.svg" },
+            { id: 8, src: "/assets/frame/4-photos-2/1.svg" },
+            { id: 8, src: "/assets/frame/4-photos-2/2.svg" },
+            { id: 8, src: "/assets/frame/4-photos-2/3.svg" },
+            { id: 8, src: "/assets/frame/4-photos-2/4.svg" },
+            { id: 8, src: "/assets/frame/4-photos-2/5.svg" },
         ],
     };
 
