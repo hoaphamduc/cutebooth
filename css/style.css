@@ -23,15 +23,20 @@ body {
 
 main {
     width: 100%;
-    float: 1;
     height: calc(100% - 40px);
     overflow: hidden;
     border-radius: 8px 8px 0 0;
-    overflow: hidden;
+}
+
+.custom-text-color {
+    background: linear-gradient(to right, #247afe, #e1597d);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 section {
-    height: 100%;
+    min-height: 100%;
+    height: auto;
     width: 100%;
     position: relative;
     background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
@@ -125,7 +130,8 @@ h3 {
     height: 100dvh;
     background-color: #fad0c4;
     z-index: 9999999;
-    display: flex;
+    /* display: flex; */
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -663,6 +669,15 @@ video {
     gap: 10px;
 }
 
+.flex-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+
 /* End Xem trước và lưu ảnh */
 
 /* Donate */
@@ -712,7 +727,7 @@ video {
     height: 100%;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1365px) {
     section {
         padding: 30px 10px;
     }
@@ -721,18 +736,122 @@ video {
         height: fit-content;
     }
 
-    #not-mobile {
-        display: none;
+    main {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        border-radius: 8px 8px 0 0;
     }
 
-    #mobile {
-        display: flex !important;
+    header {
+        display: none !important;
+    }
+
+    #mobile-menu {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: block !important;
+        background-color: transparent;
         width: 100%;
-        height: 100dvh;
-        background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+        height: 50px;
+    }
+
+    .preview-container {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: unset;
+        gap: 10px;
+        padding: 30px 10px;
+    }
+
+    #photo-preview {
+        width: 100%;
+        height: fit-content;
+        padding: 15px;
+    }
+
+    .flex-btn-container {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 20px;
+        gap: 20px;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .template-container {
+        display: flex;
+        position: relative;
+        width: 100%;
+        margin: auto;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        gap: 50px;
+        justify-content: center;
+        padding: 30px 0px;
+    }
+
+    .camera-container {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: unset;
+        position: relative;
+        gap: 20px;
+        padding: 30px 0;
+    }
+
+    .select-frame-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: unset;
+        padding: 30px 0;
+    }
+
+    .frame-option {
+        width: auto;
+        height: 180px;
+        cursor: pointer;
+        pointer-events: unset !important;
+        background-color: transparent;
+    }
+
+    .filter-options {
+        width: 100%;
+        height: 120px;
+        overflow: auto;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 10px;
+        white-space: nowrap;
+        gap: 10px;
+    }
+
+    .filter-option-container {
+        height: unset;
+    }
+
+    .filter {
+        cursor: pointer;
+        width: 100px !important;
+        height: 100px;
+        display: inline-block;
         text-align: center;
+        line-height: 100px;
+        font-size: 14px;
+        border: 1px solid #000;
+        border-radius: 8px;
+        background: url(/assets/images/placehoder.jpeg) no-repeat center;
+        background-size: cover;
+        color: #fff;
+        font-weight: 700;
+        transition: .3s ease-in-out;
+        flex-shrink: 0;
     }
 }
