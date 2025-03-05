@@ -23,11 +23,9 @@ body {
 
 main {
     width: 100%;
-    float: 1;
     height: calc(100% - 40px);
     overflow: hidden;
     border-radius: 8px 8px 0 0;
-    overflow: hidden;
 }
 
 .custom-text-color {
@@ -37,7 +35,8 @@ main {
 }
 
 section {
-    height: 100%;
+    min-height: 100%;
+    height: auto;
     width: 100%;
     position: relative;
     background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
@@ -131,7 +130,8 @@ h3 {
     height: 100dvh;
     background-color: #fad0c4;
     z-index: 9999999;
-    display: flex;
+    /* display: flex; */
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -718,13 +718,34 @@ video {
     height: 100%;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1365px) {
     section {
         padding: 30px 10px;
     }
 
     #camera-preview {
         height: fit-content;
+    }
+
+    main {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        border-radius: 8px 8px 0 0;
+    }
+
+    header {
+        display: none !important;
+    }
+
+    #mobile-menu {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: block !important;
+        background-color: transparent;
+        width: 100%;
+        height: 50px;
     }
 
     /* #not-mobile {

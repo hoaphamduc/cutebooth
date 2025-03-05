@@ -3,6 +3,7 @@ header {
     width: 100%;
     height: 40px;
     padding: 0 5px;
+    z-index: 999999;
 }
 
 .address-bar {
@@ -22,7 +23,7 @@ header {
     display: flex;
     align-items: center;
     cursor: pointer;
-    gap: 5px;
+    gap: 10px;
     border-radius: 10px;
     position: relative;
     transition: background-color 0.3s ease-in-out;
@@ -75,6 +76,39 @@ header {
     user-select: none;
     pointer-events: none;
     font-weight: 500;
+}
+
+#mobile-nav {
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+    margin: auto;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.address-mobile {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.address-mobile img {
+    width: 25px;
+    height: 25px;
+    border: none;
+}
+
+.address-mobile.active {
+    background-color: rgb(188, 251, 255);
 }
 
 .info-btn {
@@ -147,4 +181,8 @@ header {
 
 .language-dropdown.active .language-menu {
     display: block;
+}
+
+#mobile-menu {
+    display: none;
 }

@@ -101,6 +101,7 @@ document.getElementById('setLanguageZH').addEventListener('click', () => {
 });
 
 // Hàm mở section
+// Hàm mở section
 function showSection(sectionId) {
     // Ẩn tất cả các section
     document.querySelectorAll("main section").forEach(section => {
@@ -115,29 +116,38 @@ function showSection(sectionId) {
         console.warn(`Không tìm thấy section với ID: ${sectionId}`);
     }
 
-    // Xử lý các .address
-    document.querySelectorAll(".address").forEach(address => {
-        // Xóa lớp 'active' khỏi tất cả các .address
-        address.classList.remove("active");
+    // Hàm xử lý thêm class active cho các .address và .address-mobile
+    function updateAddressClasses(selector) {
+        document.querySelectorAll(selector).forEach(address => {
+            // Xóa lớp 'active' khỏi tất cả các phần tử
+            address.classList.remove("active");
 
-        // Thêm lớp 'active' vào .address có data-section-id tương ứng
-        if (address.getAttribute("data-section-id") === sectionId) {
-            address.classList.add("active");
-        }
-    });
+            // Thêm lớp 'active' vào phần tử có data-section-id tương ứng
+            if (address.getAttribute("data-section-id") === sectionId) {
+                address.classList.add("active");
+            }
+        });
+    }
+
+    // Cập nhật .address và .address-mobile
+    updateAddressClasses(".address");
+    updateAddressClasses(".address-mobile");
 }
 
-// Lấy tất cả các .address
+// Lấy tất cả các .address và .address-mobile
 const addresses = document.querySelectorAll(".address");
+const addressesMobile = document.querySelectorAll(".address-mobile");
 
-// Gán sự kiện click cho từng .address
-addresses.forEach(address => {
-    address.addEventListener("click", () => {
-        // Lấy ID của section từ thuộc tính data-section-id
-        const sectionId = address.getAttribute("data-section-id");
+// Gán sự kiện click cho từng .address và .address-mobile
+[addresses, addressesMobile].forEach(addressesGroup => {
+    addressesGroup.forEach(address => {
+        address.addEventListener("click", () => {
+            // Lấy ID của section từ thuộc tính data-section-id
+            const sectionId = address.getAttribute("data-section-id");
 
-        // Gọi hàm hiển thị section
-        showSection(sectionId);
+            // Gọi hàm hiển thị section
+            showSection(sectionId);
+        });
     });
 });
 
@@ -229,7 +239,30 @@ document.getElementById("upload-photo").addEventListener("click", function () {
                 const reader = new FileReader();
 
                 reader.onload = function (e) {
-                    addPhotoToQueue(e.target.result);
+                    const img = new Image();
+                    img.onload = function () {
+                        // Tạo canvas 600x600
+                        const canvas = document.createElement("canvas");
+                        canvas.width = 600;
+                        canvas.height = 600;
+                        const ctx = canvas.getContext("2d");
+
+                        // Tính scale để ảnh cover canvas
+                        const scale = Math.max(600 / img.width, 600 / img.height);
+                        const newWidth = img.width * scale;
+                        const newHeight = img.height * scale;
+                        // Tính offset để ảnh được căn giữa
+                        const dx = (600 - newWidth) / 2;
+                        const dy = (600 - newHeight) / 2;
+
+                        // Vẽ ảnh lên canvas
+                        ctx.drawImage(img, dx, dy, newWidth, newHeight);
+
+                        // Xuất ảnh ra định dạng JPEG với chất lượng 1
+                        const formattedDataUrl = canvas.toDataURL("image/jpeg", 1);
+                        addPhotoToQueue(formattedDataUrl);
+                    };
+                    img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
@@ -273,20 +306,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Xử lý chụp ảnh khi bấm nút
             captureButton.addEventListener("click", function () {
-                const canvas = document.createElement("canvas");
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const context = canvas.getContext("2d");
-
-                // Nếu flipCamera = true, vẽ ảnh với transform lật ngang
+                // Tạo canvas để chụp ảnh từ video
+                const captureCanvas = document.createElement("canvas");
+                captureCanvas.width = video.videoWidth;
+                captureCanvas.height = video.videoHeight;
+                const captureCtx = captureCanvas.getContext("2d");
+            
+                // Nếu flipCamera = true, áp dụng transform lật ngang
                 if (flipCamera) {
-                    context.translate(canvas.width, 0);
-                    context.scale(-1, 1);
+                    captureCtx.translate(captureCanvas.width, 0);
+                    captureCtx.scale(-1, 1);
                 }
-                // Vẽ video lên canvas
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                const photoUrl = canvas.toDataURL("image/png");
+                // Vẽ video lên canvas capture
+                captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
+            
+                // Tạo canvas mới với kích thước cố định 600x600
+                const formattedCanvas = document.createElement("canvas");
+                formattedCanvas.width = 600;
+                formattedCanvas.height = 600;
+                const formattedCtx = formattedCanvas.getContext("2d");
+            
+                // Tính toán tỉ lệ scale cần thiết để ảnh cover canvas 600x600
+                const scale = Math.max(600 / captureCanvas.width, 600 / captureCanvas.height);
+                const newWidth = captureCanvas.width * scale;
+                const newHeight = captureCanvas.height * scale;
+                // Tính offset để căn giữa ảnh trong canvas
+                const dx = (600 - newWidth) / 2;
+                const dy = (600 - newHeight) / 2;
+            
+                // Vẽ ảnh từ canvas capture vào canvas đã format
+                formattedCtx.drawImage(captureCanvas, dx, dy, newWidth, newHeight);
+            
+                // Xuất ảnh ra định dạng JPEG với chất lượng 1
+                const photoUrl = formattedCanvas.toDataURL("image/jpeg", 1);
                 addPhotoToQueue(photoUrl);
             });
         })
@@ -566,7 +618,7 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
 });
 
 document.getElementById("save-photo").addEventListener("click", function () {
-    // Tìm phần tử có class .photo-preview
+    // Find the preview photo element
     const photoPreview = document.querySelector(".photo-preview");
 
     if (!photoPreview) {
@@ -579,14 +631,14 @@ document.getElementById("save-photo").addEventListener("click", function () {
         return;
     }
 
-    // Clone phần tử
+    // Clone the preview photo
     const photoClone = photoPreview.cloneNode(true);
 
-    // Thay đổi class của bản clone
+    // Change class of the clone
     photoClone.classList.remove("photo-preview");
     photoClone.classList.add("photo-print");
 
-    // Tạo một container tạm thời và thêm bản clone vào DOM
+    // Create a temporary container and append the cloned photo to it
     const tempContainer = document.createElement("div");
     tempContainer.style.position = "absolute";
     tempContainer.style.top = "-9999px";
@@ -594,25 +646,24 @@ document.getElementById("save-photo").addEventListener("click", function () {
     tempContainer.appendChild(photoClone);
     document.body.appendChild(tempContainer);
 
-    // Sử dụng dom-to-image để tạo ảnh từ bản clone
+    // Use dom-to-image to create an image from the clone
     domtoimage.toPng(photoClone)
         .then(function (dataUrl) {
-            // Xóa container tạm thời sau khi tạo ảnh
+            // Remove the temporary container after creating the image
             document.body.removeChild(tempContainer);
 
-            // Kiểm tra nếu đang chạy trên iOS
+            // Check if the user is on iOS
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             if (isIOS) {
-                // Mở ảnh trong tab mới để người dùng nhấn giữ lưu ảnh
-                window.open(dataUrl, '_blank');
-                Swal.fire({
-                    title: '<span data-vi="Lưu Ảnh" data-en="Save Image" data-zh="保存图片"></span>',
-                    html: '<span data-vi="Trên iOS, vui lòng nhấn và giữ hình ảnh trong tab mới để lưu vào thiết bị của bạn." data-en="On iOS, please press and hold the image in the new tab to save it to your device." data-zh="在iOS上，请在新标签页中长按图片以保存到您的设备。"></span>',
-                    icon: 'info',
-                    confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
-                });
+                // Adjust the image scaling to fit full width if needed
+                const downloadLink = document.createElement("a");
+                downloadLink.href = dataUrl;
+                downloadLink.download = "cutebooth.png"; // Set filename for the downloaded file
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
             } else {
-                // Tạo thẻ <a> để tải ảnh xuống (cho trình duyệt khác)
+                // Trigger download for non-iOS devices
                 const downloadLink = document.createElement("a");
                 downloadLink.href = dataUrl;
                 downloadLink.download = "cutebooth.png";
@@ -623,7 +674,7 @@ document.getElementById("save-photo").addEventListener("click", function () {
         })
         .catch(function (error) {
             document.body.removeChild(tempContainer);
-            console.error("Lỗi tạo hình ảnh:", error);
+            console.error("Error generating image:", error);
             Swal.fire({
                 title: '<span data-vi="Lỗi" data-en="Error" data-zh="错误"></span>',
                 html: '<span data-vi="Đã xảy ra lỗi khi tải ảnh." data-en="An error occurred while uploading the image." data-zh="上传图片时发生错误。"></span>',
@@ -665,6 +716,8 @@ function getFramesByTemplateType(templateType) {
             { id: 2, src: "/assets/frame/3-photos/1.svg" },
             { id: 3, src: "/assets/frame/3-photos/2.svg" },
             { id: 4, src: "/assets/frame/3-photos/3.svg" },
+            { id: 5, src: "/assets/frame/3-photos/4.svg" },
+            { id: 6, src: "/assets/frame/3-photos/5.svg" },
         ],
         "template-4-photos": [
             { id: 1, src: "/assets/frame/4-photos/no-frame.png" },
@@ -685,6 +738,7 @@ function getFramesByTemplateType(templateType) {
             { id: 8, src: "/assets/frame/4-photos-2/3.svg" },
             { id: 8, src: "/assets/frame/4-photos-2/4.svg" },
             { id: 8, src: "/assets/frame/4-photos-2/5.svg" },
+            { id: 9, src: "/assets/frame/4-photos-2/6.svg" },
         ],
     };
 
