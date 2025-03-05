@@ -669,6 +669,15 @@ video {
     gap: 10px;
 }
 
+.flex-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+
 /* End Xem trước và lưu ảnh */
 
 /* Donate */
@@ -748,18 +757,101 @@ video {
         height: 50px;
     }
 
-    /* #not-mobile {
-        display: none;
-    } */
+    .preview-container {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: unset;
+        gap: 10px;
+        padding: 30px 10px;
+    }
 
-    /* #mobile {
-        display: flex !important;
+    #photo-preview {
         width: 100%;
-        height: 100dvh;
-        background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+        height: fit-content;
+        padding: 15px;
+    }
+
+    .flex-btn-container {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 20px;
+        gap: 20px;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .template-container {
+        display: flex;
+        position: relative;
+        width: 100%;
+        margin: auto;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        gap: 50px;
+        justify-content: center;
+        padding: 30px 0px;
+    }
+
+    .camera-container {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: unset;
+        position: relative;
+        gap: 20px;
+        padding: 30px 0;
+    }
+
+    .select-frame-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: unset;
+        padding: 30px 0;
+    }
+
+    .frame-option {
+        width: auto;
+        height: 180px;
+        cursor: pointer;
+        pointer-events: unset !important;
+        background-color: transparent;
+    }
+
+    .filter-options {
+        width: 100%;
+        height: 120px;
+        overflow: auto;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 10px;
+        white-space: nowrap;
+        gap: 10px;
+    }
+
+    .filter-option-container {
+        height: unset;
+    }
+
+    .filter {
+        cursor: pointer;
+        width: 100px !important;
+        height: 100px;
+        display: inline-block;
         text-align: center;
-    } */
+        line-height: 100px;
+        font-size: 14px;
+        border: 1px solid #000;
+        border-radius: 8px;
+        background: url(/assets/images/placehoder.jpeg) no-repeat center;
+        background-size: cover;
+        color: #fff;
+        font-weight: 700;
+        transition: .3s ease-in-out;
+        flex-shrink: 0;
+    }
 }
