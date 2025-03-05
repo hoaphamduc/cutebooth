@@ -1,18 +1,7 @@
 console.log('Cảm ơn bạn đã ghé thăm trang web của meobeo! Chúc bạn vui vẻ! Mọi thông tin chi tiết vui lòng liên hệ https://meobeo.dev');
 console.log('Nếu có ý tưởng hay muốn đóng góp cho project vui lòng truy cập https://github.com/hoaphamduc/cutebooth');
 
-const mobileWidth = 1023;
-
 document.addEventListener('DOMContentLoaded', () => {
-    // if (window.innerWidth < mobileWidth) {
-    //     Swal.fire({
-    //         title: '<span data-vi="Thông Báo" data-en="Notification" data-zh="通知"></span>',
-    //         html: '<span data-vi="Website hiện tại chưa hỗ trợ trên các thiết bị di động. Các bạn vui lòng dùng trên PC :3 Mình cảm ơn!" data-en="The website is not currently supported on mobile devices. Please use it on a PC :3 Thank you!" data-zh="目前网站尚不支持移动设备。请在PC上使用哦 :3 谢谢!"></span>',
-    //         icon: 'warning',
-    //         confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
-    //     });
-    // }
-
     setTimeout(function() {
         document.getElementById('loader').style.display = 'none';
     }, 2399);

@@ -161,8 +161,7 @@ h3 {
     height: 100dvh;
     background-color: #fad0c4;
     z-index: 9999999;
-    /* display: flex; */
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
