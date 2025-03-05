@@ -151,6 +151,7 @@ let filledSlots = []; // Lưu danh sách các slot trong template đã được 
 let photoCount = 0;
 
 // Function to Add Photo to Queue
+// Function to Add Photo to Queue
 function addPhotoToQueue(photoUrl) {
     if (!photoUrl) return;
 
@@ -178,13 +179,21 @@ function addPhotoToQueue(photoUrl) {
     const removeBtn = document.createElement("button");
     removeBtn.className = "remove-photo";
     removeBtn.textContent = "x";
-    removeBtn.addEventListener("click", function () {
+    removeBtn.addEventListener("click", function (event) {
+        event.stopPropagation(); // Ngăn sự kiện click lan lên photoWrapper
+        // Nếu ảnh đang được chọn trong template, xóa ảnh khỏi template
+        if (photoWrapper.dataset.selected === "true") {
+            clearImageFromTemplate(photo.src);
+        }
         photoQueue.removeChild(photoWrapper);
         photoCount--;
     });
-
+    
     // Add click event to select/unselect photo for template
-    photoWrapper.addEventListener("click", function () {
+    photoWrapper.addEventListener("click", function (event) {
+        // Nếu sự kiện click đến từ nút remove, không xử lý thêm
+        if (event.target.closest(".remove-photo")) return;
+    
         const isSelected = photoWrapper.dataset.selected === "true";
         if (!isSelected) {
             // Điền ảnh vào template

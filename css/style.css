@@ -48,6 +48,10 @@ section.active {
     display: block;
 }
 
+#youtube-video {
+    margin-top: 20px;
+}
+
 .camera-action {
     display: flex;
     gap: 10px;
@@ -404,7 +408,7 @@ h3 {
 }
 
 #start-session {
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
 /* End Chào mừng */
@@ -503,6 +507,7 @@ video {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
 }
 
 .photo-thumbnail img {
@@ -909,5 +914,11 @@ video {
     .mobile-flex-column-reverse {
         flex-direction: column-reverse;
         gap: 10px;
+    }
+
+    #youtube-video {
+        width: 320px !important;
+        height: auto !important;
+        aspect-ratio: 16/9;
     }
 }
