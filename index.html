@@ -179,21 +179,23 @@
                     <div class="camera-container-column" id="camera-preview">
                         <!-- Video và nút đã được định nghĩa sẵn -->
                         <video id="camera-video" autoplay playsinline></video>
-                        <div class="flex-btn-container">
-                            <button id="capture-button" class="custom-button">
-                                <span data-vi="Chụp ảnh" data-en="Take photo" data-zh="拍照"></span>
+                        <div class="camera-action">
+                            <button id="upload-photo" class="custom-button-2">
+                                <img src="/assets/images/image-upload.png" alt="Nút upload ảnh">
                             </button>
-                            <button id="upload-photo" class="custom-button">
-                                <span data-vi="Tải ảnh lên" data-en="Upload image" data-zh="上传图片"></span>
+
+                            <button id="capture-button" class="custom-button-2" style="height: 60px; width: 60px; border: 1px solid #ddd; border-radius: 50%; background-color: #fff;">
+                                <img src="/assets/images/camera.png" alt="Nút chụp ảnh">
                             </button>
-                            <label>
-                                <input type="checkbox" id="flip-toggle" checked>
-                                <span data-vi="Lật cam" data-en="Flip Cam" data-zh="翻转摄像头"></span>
+
+                            <label class="custom-button-2">
+                                <input type="checkbox" id="flip-toggle" checked hidden>
+                                <img src="/assets/images/flip.png" alt="Nút lật ảnh">
                             </label>
                         </div>
                     </div>
     
-                    <div class="camera-container-column">
+                    <div class="camera-container-column mobile-flex-column-reverse">
                         <h3 data-vi="Hàng đợi ảnh (tối đa: 12 ảnh). Nhấn vào ảnh trong hàng đợi để điền ảnh vào mẫu, bạn có thể nhấn thêm lần nữa để hủy chọn."
                         data-en="Image queue (max: 12 images). Click on an image in the queue to add it to the template, you can click again to deselect."
                         data-zh="图片队列（最多：12张图片）。点击队列中的图片将其添加到模板中，您可以再次点击以取消选择。"></h3>

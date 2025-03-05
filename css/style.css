@@ -48,6 +48,37 @@ section.active {
     display: block;
 }
 
+.camera-action {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.custom-button-2 {
+    background-color: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.custom-button-2:hover {
+    background-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.custom-button-2 img {
+    width: 75%;
+    height: 75%;
+    object-fit: cover;
+    border: none;
+}
+
 .custom-button {
     display: block;
     padding: 0.1em 0.25em;
@@ -755,6 +786,7 @@ video {
         background-color: transparent;
         width: 100%;
         height: 50px;
+        z-index: 99999;
     }
 
     .preview-container {
@@ -853,5 +885,30 @@ video {
         font-weight: 700;
         transition: .3s ease-in-out;
         flex-shrink: 0;
+    }
+
+    #photo-preview {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+    #my-qr {
+        height: 300px;
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .mobile-flex-column-reverse {
+        flex-direction: column-reverse;
+        gap: 10px;
     }
 }
