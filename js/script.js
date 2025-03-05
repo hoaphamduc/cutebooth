@@ -347,7 +347,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 countdownOverlay.style.top = "50%";
                 countdownOverlay.style.left = "50%";
                 countdownOverlay.style.transform = "translate(-50%, -50%)";
-                countdownOverlay.style.fontSize = "48px";
+                countdownOverlay.style.fontSize = "69px";
+                countdownOverlay.style.fontWeight = "600";
                 countdownOverlay.style.color = "#fff";
                 countdownOverlay.style.padding = "10px 20px";
                 countdownOverlay.style.borderRadius = "8px";
