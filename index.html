@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <meta name="keywords" content="Photobooth online, chụp ảnh trực tuyến, tạo khung ảnh, chỉnh sửa ảnh, Photobooth miễn phí, tạo template ảnh, chụp ảnh đẹp">
 
     <!-- Author -->
-    <meta name="author" content="meobeo.dev">
+    <meta name="author" content="meobeo.netlify.app">
 
     <!-- Robots -->
     <meta name="robots" content="index, follow">
@@ -21,22 +21,36 @@
     <!-- Social Media Open Graph Tags -->
     <meta property="og:title" content="Cutebooth - Photobooth Online Miễn Phí">
     <meta property="og:description" content="Chụp ảnh trực tuyến miễn phí với Cutebooth. Tạo khung ảnh đẹp, chỉnh sửa và lưu ảnh dễ dàng. Thử ngay hôm nay!">
-    <meta property="og:image" content="https://cutebooth.meobeo.dev/assets/images/logo.png">
-    <meta property="og:url" content="https://cutebooth.meobeo.dev">
+    <meta property="og:image" content="https://cutebooth.cutebooth.netlify.app/assets/images/logo.png">
+    <meta property="og:url" content="https://cutebooth.cutebooth.netlify.app">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cutebooth - Photobooth Online Miễn Phí">
     <meta name="twitter:description" content="Chụp ảnh trực tuyến miễn phí với Cutebooth. Tạo khung ảnh đẹp, chỉnh sửa và lưu ảnh dễ dàng. Thử ngay hôm nay!">
-    <meta name="twitter:image" content="https://cutebooth.meobeo.dev/assets/images/logo.png">
+    <meta name="twitter:image" content="https://cutebooth.cutebooth.netlify.app/assets/images/logo.png">
     <meta name="twitter:site" content="@cutebooth">
 
     <!-- Favicon -->
     <link rel="icon" href="/assets/images/logo.png" type="image/x-icon">
 
     <!-- Canonical Link -->
-    <link rel="canonical" href="https://cutebooth.meobeo.dev">
+    <link rel="canonical" href="https://cutebooth.cutebooth.netlify.app">
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Cutebooth",
+          "url": "https://cutebooth.netlify.app",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://cutebooth.meobeo.dev/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+    </script>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
@@ -44,11 +58,11 @@
     <link rel="stylesheet" href="css/template.css">
 
     <!-- JavaScript -->
-    <script src="js/dom-to-image.min.js"></script>
+    <script src="js/dom-to-image.min.js" defer></script>
 
     <!-- SweetAlert2 -->
     <link href="assets/swal2/swal2.css" rel="stylesheet">
-    <script src="assets/swal2/swal2.js"></script>
+    <script src="assets/swal2/swal2.js" defer></script>
 
 </head>
 
@@ -118,6 +132,12 @@
                 <div id="welcome-content">
                     <h1 class="custom-text-color" data-vi="Chào mừng bạn đến với Cutebooth! Đây là trang web chụp Photobooth Online miễn phí dành cho các bạn ❤" data-en="Welcome to Cutebooth! This is a free online Photobooth website for you ❤" data-zh="欢迎来到 Cutebooth！这是一个免费的在线摄影亭网站，供您使用 ❤"></h1>
                     <iframe id="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/dkHQEm3Iesw?si=XCaCG3_LSMJcGKPG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <span style="margin-top: 10px; display: block;">
+                        <span data-vi="Được phát triển bởi"
+                        data-en="Developed by"
+                        data-zh="由...开发"></span> 
+                        <a href="https://meobeo.dev/" class="span-btn" target="_blank">meobeo.dev</a>
+                    </span>
                     <button id="start-session" class="custom-button">
                         <span data-vi="Bắt đầu" data-en="Start" data-zh="开始"></span>
                     </button>
