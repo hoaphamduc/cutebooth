@@ -178,7 +178,9 @@
     
                     <div class="camera-container-column" id="camera-preview">
                         <!-- Video và nút đã được định nghĩa sẵn -->
-                        <video id="camera-video" autoplay playsinline></video>
+                        <div id="camera-container" style="position: relative;width: fit-content;height: fit-content;">
+                            <video id="camera-video" autoplay playsinline></video>
+                        </div>
                         <div class="camera-action">
                             <button id="upload-photo" class="custom-button-2">
                                 <img src="/assets/images/image-upload.png" alt="Nút upload ảnh">
@@ -186,6 +188,10 @@
 
                             <button id="capture-button" class="custom-button-2" style="height: 60px; width: 60px; border: 1px solid #ddd; border-radius: 50%; background-color: #fff;">
                                 <img src="/assets/images/camera.png" alt="Nút chụp ảnh">
+                            </button>
+
+                            <button id="auto-take-photo" class="custom-button-2">
+                                <img src="/assets/images/time.png" alt="Nút chụp tự động">
                             </button>
 
                             <label class="custom-button-2">

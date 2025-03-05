@@ -90,7 +90,6 @@ document.getElementById('setLanguageZH').addEventListener('click', () => {
 });
 
 // Hàm mở section
-// Hàm mở section
 function showSection(sectionId) {
     // Ẩn tất cả các section
     document.querySelectorAll("main section").forEach(section => {
@@ -271,11 +270,50 @@ let flipCamera = true;
 document.addEventListener("DOMContentLoaded", function () {
     const video = document.getElementById("camera-video");
     const captureButton = document.getElementById("capture-button");
+    const autoTakePhotoButton = document.getElementById("auto-take-photo");
     const flipToggle = document.getElementById("flip-toggle");
 
-    // Hàm cập nhật transform cho video
+    // Hàm cập nhật transform cho video dựa trên trạng thái flipCamera
     function updateVideoTransform() {
         video.style.transform = flipCamera ? "scaleX(-1)" : "none";
+    }
+
+    // Hàm chụp ảnh dùng chung cho cả hai nút
+    function capturePhoto() {
+        // Tạo canvas để chụp ảnh từ video
+        const captureCanvas = document.createElement("canvas");
+        captureCanvas.width = video.videoWidth;
+        captureCanvas.height = video.videoHeight;
+        const captureCtx = captureCanvas.getContext("2d");
+
+        // Nếu flipCamera = true, áp dụng transform lật ngang
+        if (flipCamera) {
+            captureCtx.translate(captureCanvas.width, 0);
+            captureCtx.scale(-1, 1);
+        }
+        // Vẽ video lên canvas capture
+        captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
+
+        // Tạo canvas mới với kích thước cố định 600x600
+        const formattedCanvas = document.createElement("canvas");
+        formattedCanvas.width = 600;
+        formattedCanvas.height = 600;
+        const formattedCtx = formattedCanvas.getContext("2d");
+
+        // Tính toán tỉ lệ scale để ảnh cover canvas 600x600
+        const scale = Math.max(600 / captureCanvas.width, 600 / captureCanvas.height);
+        const newWidth = captureCanvas.width * scale;
+        const newHeight = captureCanvas.height * scale;
+        // Tính offset để căn giữa ảnh trong canvas
+        const dx = (600 - newWidth) / 2;
+        const dy = (600 - newHeight) / 2;
+
+        // Vẽ ảnh từ canvas capture vào canvas đã format
+        formattedCtx.drawImage(captureCanvas, dx, dy, newWidth, newHeight);
+
+        // Xuất ảnh ra định dạng JPEG với chất lượng 1
+        const photoUrl = formattedCanvas.toDataURL("image/jpeg", 1);
+        addPhotoToQueue(photoUrl);
     }
 
     // Khi tùy chọn flip được thay đổi
@@ -293,42 +331,44 @@ document.addEventListener("DOMContentLoaded", function () {
             // Áp dụng transform theo trạng thái ban đầu
             updateVideoTransform();
 
-            // Xử lý chụp ảnh khi bấm nút
+            // Xử lý chụp ảnh khi bấm nút "chụp ảnh"
             captureButton.addEventListener("click", function () {
-                // Tạo canvas để chụp ảnh từ video
-                const captureCanvas = document.createElement("canvas");
-                captureCanvas.width = video.videoWidth;
-                captureCanvas.height = video.videoHeight;
-                const captureCtx = captureCanvas.getContext("2d");
-            
-                // Nếu flipCamera = true, áp dụng transform lật ngang
-                if (flipCamera) {
-                    captureCtx.translate(captureCanvas.width, 0);
-                    captureCtx.scale(-1, 1);
-                }
-                // Vẽ video lên canvas capture
-                captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
-            
-                // Tạo canvas mới với kích thước cố định 600x600
-                const formattedCanvas = document.createElement("canvas");
-                formattedCanvas.width = 600;
-                formattedCanvas.height = 600;
-                const formattedCtx = formattedCanvas.getContext("2d");
-            
-                // Tính toán tỉ lệ scale cần thiết để ảnh cover canvas 600x600
-                const scale = Math.max(600 / captureCanvas.width, 600 / captureCanvas.height);
-                const newWidth = captureCanvas.width * scale;
-                const newHeight = captureCanvas.height * scale;
-                // Tính offset để căn giữa ảnh trong canvas
-                const dx = (600 - newWidth) / 2;
-                const dy = (600 - newHeight) / 2;
-            
-                // Vẽ ảnh từ canvas capture vào canvas đã format
-                formattedCtx.drawImage(captureCanvas, dx, dy, newWidth, newHeight);
-            
-                // Xuất ảnh ra định dạng JPEG với chất lượng 1
-                const photoUrl = formattedCanvas.toDataURL("image/jpeg", 1);
-                addPhotoToQueue(photoUrl);
+                capturePhoto();
+            });
+
+            // Xử lý nút "auto chụp ảnh" với đếm ngược 5 giây
+            autoTakePhotoButton.addEventListener("click", function () {
+                let countdown = 5;
+
+                // Tạo overlay đếm ngược
+                const countdownOverlay = document.createElement("div");
+                countdownOverlay.id = "countdown-overlay";
+                countdownOverlay.style.position = "absolute";
+                countdownOverlay.style.top = "50%";
+                countdownOverlay.style.left = "50%";
+                countdownOverlay.style.transform = "translate(-50%, -50%)";
+                countdownOverlay.style.fontSize = "48px";
+                countdownOverlay.style.color = "#fff";
+                countdownOverlay.style.padding = "10px 20px";
+                countdownOverlay.style.borderRadius = "8px";
+
+                // Đảm bảo thẻ cha của video có position relative để overlay hiển thị chính xác
+                document.getElementById('camera-container').style.position = "relative";
+                document.getElementById('camera-container').appendChild(countdownOverlay);
+
+                countdownOverlay.textContent = countdown;
+
+                // Đếm ngược mỗi giây
+                const interval = setInterval(() => {
+                    countdown--;
+                    if (countdown > 0) {
+                        countdownOverlay.textContent = countdown;
+                    } else {
+                        clearInterval(interval);
+                        countdownOverlay.remove();
+                        capturePhoto();
+                    }
+                }, 1000);
             });
         })
         .catch((err) => {
