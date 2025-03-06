@@ -904,4 +904,8 @@ video {
         height: auto !important;
         aspect-ratio: 16/9;
     }
+
+    #welcome-content {
+        justify-content: start;
+    }
 }
