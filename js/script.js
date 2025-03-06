@@ -2,7 +2,7 @@ console.log('Cảm ơn bạn đã ghé thăm trang web của meobeo! Chúc bạn
 console.log('Nếu có ý tưởng hay muốn đóng góp cho project vui lòng truy cập https://github.com/hoaphamduc/cutebooth');
 
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(function() {
+    setTimeout(function () {
         document.getElementById('loader').style.display = 'none';
     }, 2399);
 });
@@ -188,12 +188,12 @@ function addPhotoToQueue(photoUrl) {
         photoQueue.removeChild(photoWrapper);
         photoCount--;
     });
-    
+
     // Add click event to select/unselect photo for template
     photoWrapper.addEventListener("click", function (event) {
         // Nếu sự kiện click đến từ nút remove, không xử lý thêm
         if (event.target.closest(".remove-photo")) return;
-    
+
         const isSelected = photoWrapper.dataset.selected === "true";
         if (!isSelected) {
             // Điền ảnh vào template
@@ -382,14 +382,12 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch((err) => {
-            if (window.innerWidth >= mobileWidth) {
-                Swal.fire({
-                    title: '<span data-vi="Lỗi Camera" data-en="Camera Error" data-zh="相机错误"></span>',
-                    html: `<span data-vi="Không thể truy cập vào máy ảnh:" data-en="Unable to access the camera:" data-zh="无法访问相机："></span> ${err.message}. <span data-vi="Vui lòng kiểm tra cài đặt trình duyệt và máy ảnh của bạn!" data-en="Please check your browser and camera settings!" data-zh="请检查您的浏览器和相机设置！"></span>`,
-                    icon: 'error',
-                    confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
-                });
-            }
+            Swal.fire({
+                title: '<span data-vi="Lỗi Camera" data-en="Camera Error" data-zh="相机错误"></span>',
+                html: `<span data-vi="Không thể truy cập vào máy ảnh:" data-en="Unable to access the camera:" data-zh="无法访问相机："></span> ${err.message}. <span data-vi="Vui lòng kiểm tra cài đặt trình duyệt và máy ảnh của bạn!" data-en="Please check your browser and camera settings!" data-zh="请检查您的浏览器和相机设置！"></span>`,
+                icon: 'error',
+                confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
+            });
         });
 });
 
