@@ -908,4 +908,8 @@ video {
     #welcome-content {
         justify-content: start;
     }
+
+    .welcomte-text {
+        max-width: 300px;
+    }
 }

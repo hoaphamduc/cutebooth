@@ -457,7 +457,7 @@ function clearImageFromTemplate(photoUrl) {
     const imgPlaceholders = selectedTemplate.querySelectorAll("img");
     for (let i = 0; i < imgPlaceholders.length; i++) {
         if (filledSlots[i] === photoUrl) {
-            imgPlaceholders[i].src = "/assets/images/placehoder.jpeg";
+            imgPlaceholders[i].src = "/assets/images/placehoder.webp";
             filledSlots[i] = null; // Xóa trạng thái slot
             return true;
         }
