@@ -238,19 +238,19 @@ document.getElementById("upload-photo").addEventListener("click", function () {
                 reader.onload = function (e) {
                     const img = new Image();
                     img.onload = function () {
-                        // Tạo canvas 600x600
+                        // Tạo canvas 1000x1000
                         const canvas = document.createElement("canvas");
-                        canvas.width = 600;
-                        canvas.height = 600;
+                        canvas.width = 1000;
+                        canvas.height = 1000;
                         const ctx = canvas.getContext("2d");
 
                         // Tính scale để ảnh cover canvas
-                        const scale = Math.max(600 / img.width, 600 / img.height);
+                        const scale = Math.max(1000 / img.width, 1000 / img.height);
                         const newWidth = img.width * scale;
                         const newHeight = img.height * scale;
                         // Tính offset để ảnh được căn giữa
-                        const dx = (600 - newWidth) / 2;
-                        const dy = (600 - newHeight) / 2;
+                        const dx = (1000 - newWidth) / 2;
+                        const dy = (1000 - newHeight) / 2;
 
                         // Vẽ ảnh lên canvas
                         ctx.drawImage(img, dx, dy, newWidth, newHeight);
@@ -303,19 +303,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // Vẽ video lên canvas capture
         captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
 
-        // Tạo canvas mới với kích thước cố định 600x600
+        // Tạo canvas mới với kích thước cố định 1000x1000
         const formattedCanvas = document.createElement("canvas");
-        formattedCanvas.width = 600;
-        formattedCanvas.height = 600;
+        formattedCanvas.width = 1000;
+        formattedCanvas.height = 1000;
         const formattedCtx = formattedCanvas.getContext("2d");
 
-        // Tính toán tỉ lệ scale để ảnh cover canvas 600x600
-        const scale = Math.max(600 / captureCanvas.width, 600 / captureCanvas.height);
+        // Tính toán tỉ lệ scale để ảnh cover canvas 1000x1000
+        const scale = Math.max(1000 / captureCanvas.width, 1000 / captureCanvas.height);
         const newWidth = captureCanvas.width * scale;
         const newHeight = captureCanvas.height * scale;
         // Tính offset để căn giữa ảnh trong canvas
-        const dx = (600 - newWidth) / 2;
-        const dy = (600 - newHeight) / 2;
+        const dx = (1000 - newWidth) / 2;
+        const dy = (1000 - newHeight) / 2;
 
         // Vẽ ảnh từ canvas capture vào canvas đã format
         formattedCtx.drawImage(captureCanvas, dx, dy, newWidth, newHeight);
@@ -769,15 +769,17 @@ function getFramesByTemplateType(templateType) {
             { id: 2, src: "/assets/frame/4-photos-2/frame-1.png" },
             { id: 3, src: "/assets/frame/4-photos-2/frame-2.png" },
             { id: 4, src: "/assets/frame/4-photos-2/frame-3.png" },
-            // { id: 5, src: "/assets/frame/4-photos-2/frame-4.png" },
-            // { id: 6, src: "/assets/frame/4-photos-2/frame-5.png" },
-            // { id: 7, src: "/assets/frame/4-photos-2/frame-6.png" },
-            { id: 8, src: "/assets/frame/4-photos-2/1.svg" },
             { id: 8, src: "/assets/frame/4-photos-2/2.svg" },
             { id: 8, src: "/assets/frame/4-photos-2/3.svg" },
             { id: 8, src: "/assets/frame/4-photos-2/4.svg" },
             { id: 8, src: "/assets/frame/4-photos-2/5.svg" },
             { id: 9, src: "/assets/frame/4-photos-2/6.svg" },
+        ],
+        "template-8-photos": [
+            { id: 1, src: "/assets/frame/8-photos/basic-1.svg" },
+            { id: 2, src: "/assets/frame/8-photos/pastel-1.webp" },
+            { id: 3, src: "/assets/frame/8-photos/pastel-2.webp" },
+            { id: 4, src: "/assets/frame/8-photos/pastel-3.webp" },
         ],
     };
 

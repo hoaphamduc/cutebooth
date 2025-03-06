@@ -105,22 +105,22 @@ img {
     position: absolute;
 }
 
-.img-1 {
+.img-template-4-photos-2.img-1 {
     top: 12px;
     left: 12px;
 }
 
-.img-2 {
+.img-template-4-photos-2.img-2 {
     bottom: calc(36% + 12px + 12px);
     right: 12px;
 }
 
-.img-4 {
+.img-template-4-photos-2.img-4 {
     right: 12px;
     bottom: 12px;
 }
 
-.img-3 {
+.img-template-4-photos-2.img-3 {
     top: calc(36% + 12px + 12px);
     left: 12px;
 }
@@ -189,3 +189,165 @@ img {
 }
 
 /* End 4 Photos - 2 photos 1 line */
+
+/* 8 Photos */
+
+#template-8-photos {
+    width: 480px;
+    height: 240px;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.img-template-8-photos {
+    width: 20%;
+    height: calc(50% - 12px - 6px);
+    position: absolute;
+}
+
+.img-template-8-photos.img-1 {
+    top: 12px;
+    left: 12px;
+}
+
+.img-template-8-photos.img-2 {
+    top: 12px;
+    left: calc(12px + 20% + 12px);
+}
+
+.img-template-8-photos.img-3 {
+    left: 12px;
+    bottom: 12px;
+}
+
+.img-template-8-photos.img-4 {
+    bottom: 12px;
+    left: calc(12px + 20% + 12px);
+}
+
+.img-template-8-photos.img-5 {
+    right: calc(12px + 20% + 12px);
+    top: 12px;
+}
+
+.img-template-8-photos.img-6 {
+    top: 12px;
+    right: 12px;
+}
+
+.img-template-8-photos.img-7 {
+    right: calc(12px + 20% + 12px);
+    bottom: 12px;
+}
+
+.img-template-8-photos.img-8 {
+    right: 12px;
+    bottom: 12px;
+}
+
+.photo.photo-preview#template-8-photos {
+    width: 720px;
+    height: 360px;
+}
+
+.photo.photo-preview#template-8-photos .img-template-8-photos {
+    width: 20%;
+    height: calc(50% - 18px - 9px);
+    position: absolute;
+}
+
+.photo.photo-preview#template-8-photos .img-1 {
+    top: 18px;
+    left: 18px;
+}
+
+.photo.photo-preview#template-8-photos .img-2 {
+    top: 18px;
+    left: calc(18px + 20% + 18px);
+}
+
+.photo.photo-preview#template-8-photos .img-3 {
+    left: 18px;
+    bottom: 18px;
+}
+
+.photo.photo-preview#template-8-photos .img-4 {
+    bottom: 18px;
+    left: calc(18px + 20% + 18px);
+}
+
+.photo.photo-preview#template-8-photos .img-5 {
+    right: calc(18px + 20% + 18px);
+    top: 18px;
+}
+
+.photo.photo-preview#template-8-photos .img-6 {
+    top: 18px;
+    right: 18px;
+}
+
+.photo.photo-preview#template-8-photos .img-7 {
+    right: calc(18px + 20% + 18px);
+    bottom: 18px;
+}
+
+.photo.photo-preview#template-8-photos .img-8 {
+    right: 18px;
+    bottom: 18px;
+}
+
+.photo.photo-print#template-8-photos {
+    width: 2400px;
+    height: 1200px;
+    background-color: #ffffff;
+    border: 1px solid #000;
+}
+
+.photo.photo-print#template-8-photos .img-template-8-photos {
+    width: 20%;
+    height: calc(50% - 60px - 30px);
+    position: absolute;
+}
+
+.photo.photo-print#template-8-photos .img-1 {
+    top: 60px;
+    left: 60px;
+}
+
+.photo.photo-print#template-8-photos .img-2 {
+    top: 60px;
+    left: calc(60px + 20% + 60px);
+}
+
+.photo.photo-print#template-8-photos .img-3 {
+    left: 60px;
+    bottom: 60px;
+}
+
+.photo.photo-print#template-8-photos .img-4 {
+    bottom: 60px;
+    left: calc(60px + 20% + 60px);;
+}
+
+.photo.photo-print#template-8-photos .img-5 {
+    right: calc(60px + 20% + 60px);
+    top: 60px;
+}
+
+.photo.photo-print#template-8-photos .img-6 {
+    top: 60px;
+    right: 60px;
+}
+
+.photo.photo-print#template-8-photos .img-7 {
+    right: calc(60px + 20% + 60px);
+    bottom: 60px;
+}
+
+.photo.photo-print#template-8-photos .img-8 {
+    right: 60px;
+    bottom: 60px;
+}
+
+/* End 8 Photos */
