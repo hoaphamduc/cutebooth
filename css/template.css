@@ -350,4 +350,57 @@ img {
     bottom: 60px;
 }
 
+@media (max-width: 1365px) {
+    #template-8-photos {
+        width: 240px;
+        height: 120px;
+    }
+    
+    .img-template-8-photos {
+        width: 20%;
+        height: calc(50% - 6px - 3px);
+        position: absolute;
+    }
+    
+    .img-template-8-photos.img-1 {
+        top: 6px;
+        left: 6x;
+    }
+    
+    .img-template-8-photos.img-2 {
+        top: 6px;
+        left: calc(6px + 20% + 6px);
+    }
+    
+    .img-template-8-photos.img-3 {
+        left: 6px;
+        bottom: 6px;
+    }
+    
+    .img-template-8-photos.img-4 {
+        bottom: 6px;
+        left: calc(6px + 20% + 6px);
+    }
+    
+    .img-template-8-photos.img-5 {
+        right: calc(6px + 20% + 6px);
+        top: 6px;
+    }
+    
+    .img-template-8-photos.img-6 {
+        top: 6px;
+        right: 6px;
+    }
+    
+    .img-template-8-photos.img-7 {
+        right: calc(6px + 20% + 6px);
+        bottom: 6px;
+    }
+    
+    .img-template-8-photos.img-8 {
+        right: 6px;
+        bottom: 6px;
+    }
+}
+
 /* End 8 Photos */
