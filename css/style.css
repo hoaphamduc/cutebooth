@@ -609,8 +609,8 @@ video {
 }
 
 .frame-option {
-    width: 100px;
-    height: auto;
+    width: auto;
+    height: 180px;
     cursor: pointer;
     transition: transform 0.3s ease;
     pointer-events: unset !important;
