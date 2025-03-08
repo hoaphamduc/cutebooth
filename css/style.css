@@ -658,7 +658,7 @@ video {
     font-size: 14px;
     border: 1px solid #000;
     border-radius: 8px;
-    background: url(/assets/images/placehoder.jpeg) no-repeat center;
+    background: url(/assets/images/placehoder.webp) no-repeat center;
     object-fit: cover;
     color: #fff;
     font-weight: 700;
