@@ -756,11 +756,13 @@ function getFramesByTemplateType(templateType) {
             { id: 5, src: "/assets/frame/3-photos/4.webp" },
             { id: 6, src: "/assets/frame/3-photos/5.webp" },
             { id: 7, src: "/assets/frame/3-photos/6.webp" },
+            { id: 8, src: "/assets/frame/3-photos/7.webp" },
         ],
         "template-4-photos": [
             { id: 1, src: "/assets/frame/4-photos/no-frame.png" },
             { id: 2, src: "/assets/frame/4-photos/1.webp" },
             { id: 3, src: "/assets/frame/4-photos/2.webp" },
+            { id: 4, src: "/assets/frame/4-photos/3.webp" },
         ],
         "template-4-photos-2": [
             { id: 1, src: "/assets/frame/4-photos-2/no-frame.png" },
