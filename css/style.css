@@ -165,7 +165,8 @@ h3 {
     height: 100dvh;
     background-color: #fad0c4;
     z-index: 9999999;
-    display: flex;
+    /* display: flex; */
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -910,5 +911,11 @@ video {
 
     .welcomte-text {
         max-width: 300px;
+    }
+}
+
+@media (max-width: 360px) {
+    #mobile-nav {
+        gap: 5px !important;
     }
 }
