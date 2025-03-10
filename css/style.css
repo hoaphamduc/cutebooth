@@ -166,7 +166,6 @@ h3 {
     background-color: #fad0c4;
     z-index: 9999999;
     display: flex;
-    display: none;
     justify-content: center;
     align-items: center;
 }
