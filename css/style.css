@@ -760,7 +760,7 @@ video {
 
 @media (max-width: 1365px) {
     section {
-        padding: 30px 10px;
+        padding: 20px 10px 60px 10px;
     }
 
     #camera-preview {
