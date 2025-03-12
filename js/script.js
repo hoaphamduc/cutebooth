@@ -750,6 +750,7 @@ function getFramesByTemplateType(templateType) {
     const framesData = {
         "template-1-photo": [
             { id: 1, src: "/assets/frame/1-photo/no-frame.png" },
+            { id: 2, src: "/assets/frame/1-photo/1.webp" },
         ],
         "template-3-photos": [
             { id: 1, src: "/assets/frame/3-photos/no-frame.png" },
