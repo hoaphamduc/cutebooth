@@ -303,6 +303,13 @@
             <h2 data-vi="Chọn template mà bạn muốn sử dụng" data-en="Choose the template you want to use"
                 data-zh="选择您想要使用的模板"></h2>
             <div class="template-container">
+                <div class="photo-template">
+                    <div class="photo" id="template-1-photo">
+                        <img src="/assets/images/placehoder.webp"
+                            alt="Mẫu template photobooth online đẹp 1 ảnh - Cutebooth" class="img-template-1-photo">
+                    </div>
+                </div>
+
                 <!-- Template Ảnh Dài (Photostrip, 3 ảnh) (600 x 1800 px) -->
                 <div class="photo-template">
                     <div class="photo" id="template-3-photos">
@@ -542,6 +549,8 @@
                         data-en="Here are some frame templates for you to get creative. Click to download and draw :3 Then you can send them to me via the email above so I can add them to the website."
                         data-zh="以下是一些供您创作的边框模板。点击下载并绘制吧 :3 然后您可以通过上面的邮箱发送给我，我会将其添加到网站上。"></span>
                     <div class="frame-template-download">
+                        <span class="download-frame span-btn" onclick="downloadFrameTemplate('/template/1-photo.png');"
+                            data-vi="Mẫu 1 ảnh" data-en="1-photo template" data-zh="1张照片模板"></span>
                         <span class="download-frame span-btn" onclick="downloadFrameTemplate('/template/3-photos.png');"
                             data-vi="Mẫu 3 ảnh" data-en="3-photo template" data-zh="三张图片模板"></span>
                         <span class="download-frame span-btn" onclick="downloadFrameTemplate('/template/4-photos.png');"

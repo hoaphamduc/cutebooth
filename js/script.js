@@ -748,6 +748,9 @@ function downloadFrameTemplate(url) {
 // Lấy frame dựa trên loại template
 function getFramesByTemplateType(templateType) {
     const framesData = {
+        "template-1-photo": [
+            { id: 1, src: "/assets/frame/1-photo/no-frame.png" },
+        ],
         "template-3-photos": [
             { id: 1, src: "/assets/frame/3-photos/no-frame.png" },
             { id: 2, src: "/assets/frame/3-photos/1.webp" },
