@@ -576,16 +576,18 @@ video {
 
 .frame-option-container {
     width: 100%;
-    height: 220px;
+    height: 400px;
     padding: 15px;
     overflow: auto;
     border: 1px solid #000;
-    border-radius: 15px;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
 }
 
 .frame-options {
     display: flex;
-    gap: 10px;
+    gap: 30px;
     position: relative;
 }
 
@@ -612,14 +614,14 @@ video {
 
 .frame-option {
     width: auto;
-    height: 180px;
+    height: 340px;
     cursor: pointer;
     transition: transform 0.3s ease;
     pointer-events: unset !important;
 }
 
 .frame-option:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     border: 2px solid #007bff;
 }
 
@@ -762,7 +764,7 @@ video {
 
 @media (max-width: 1365px) {
     section {
-        padding: 20px 10px 60px 10px;
+        padding: 20px 10px 70px 10px;
     }
 
     #camera-preview {
@@ -787,7 +789,7 @@ video {
         display: block !important;
         background-color: transparent;
         width: 100%;
-        height: 50px;
+        height: 60px;
         z-index: 99999;
     }
 
