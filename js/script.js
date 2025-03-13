@@ -124,6 +124,11 @@ function addPhotoToQueue(photoUrl) {
     photo.alt = "Ảnh trong hàng đợi";
     photo.className = "queue-photo";
 
+    // Nếu thiết bị là iOS, áp dụng thêm thuộc tính -webkit-filter
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        photo.style.webkitFilter = cameraFilter;
+    }
+
     const removeBtn = document.createElement("button");
     removeBtn.className = "remove-photo";
     removeBtn.textContent = "x";
