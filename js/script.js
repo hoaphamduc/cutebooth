@@ -181,16 +181,16 @@ document.getElementById("upload-photo").addEventListener("click", function () {
                 reader.onload = function (e) {
                     const img = new Image();
                     img.onload = function () {
-                        // Tạo canvas 1000x1000 để "crop/cover" ảnh vuông
+                        // Tạo canvas 2000x2000 để "crop/cover" ảnh vuông
                         const canvas = document.createElement("canvas");
-                        canvas.width = 1000;
-                        canvas.height = 1000;
+                        canvas.width = 2000;
+                        canvas.height = 2000;
                         const ctx = canvas.getContext("2d");
-                        const scale = Math.max(1000 / img.width, 1000 / img.height);
+                        const scale = Math.max(2000 / img.width, 2000 / img.height);
                         const newWidth = img.width * scale;
                         const newHeight = img.height * scale;
-                        const dx = (1000 - newWidth) / 2;
-                        const dy = (1000 - newHeight) / 2;
+                        const dx = (2000 - newWidth) / 2;
+                        const dy = (2000 - newHeight) / 2;
                         ctx.drawImage(img, dx, dy, newWidth, newHeight);
                         const formattedDataUrl = canvas.toDataURL("image/jpeg", 1);
                         addPhotoToQueue(formattedDataUrl);
@@ -392,17 +392,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
 
-        // Đưa ảnh về 1000x1000 cho đồng nhất
+        // Đưa ảnh về 2000x2000 cho đồng nhất
         const formattedCanvas = document.createElement("canvas");
-        formattedCanvas.width = 1000;
-        formattedCanvas.height = 1000;
+        formattedCanvas.width = 2000;
+        formattedCanvas.height = 2000;
         const formattedCtx = formattedCanvas.getContext("2d");
         // Muốn filter ảnh đã được "in" lên captureCanvas, không cần set filter lần nữa
-        const scale = Math.max(1000 / captureCanvas.width, 1000 / captureCanvas.height);
+        const scale = Math.max(2000 / captureCanvas.width, 2000 / captureCanvas.height);
         const newWidth = captureCanvas.width * scale;
         const newHeight = captureCanvas.height * scale;
-        const dx = (1000 - newWidth) / 2;
-        const dy = (1000 - newHeight) / 2;
+        const dx = (2000 - newWidth) / 2;
+        const dy = (2000 - newHeight) / 2;
 
         formattedCtx.drawImage(captureCanvas, dx, dy, newWidth, newHeight);
         const photoUrl = formattedCanvas.toDataURL("image/jpeg", 1);
