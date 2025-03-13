@@ -7,154 +7,105 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2399);
 });
 
-// Hàm để thay đổi ngôn ngữ
+// Hàm thay đổi ngôn ngữ
 function setLanguage(language) {
-    const elements = document.querySelectorAll("[data-vi], [data-en]");
+    const elements = document.querySelectorAll("[data-vi], [data-en], [data-zh]");
     elements.forEach(el => {
         el.textContent = el.getAttribute(`data-${language}`);
     });
-
     localStorage.setItem('selectedLanguage', language);
-
     updateLanguageSelection(language);
-
     document.getElementById('language-menu').style.display = 'none';
 }
-
-// Hàm theo dõi các phần tử mới được thêm vào DOM và áp dụng ngôn ngữ
 function observeLanguageElements(language) {
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
             mutation.addedNodes.forEach(node => {
-                if (node.nodeType === 1 && node.matches("[data-vi], [data-en]")) {
+                if (node.nodeType === 1 && node.matches("[data-vi], [data-en], [data-zh]")) {
                     node.textContent = node.getAttribute(`data-${language}`);
                 }
-                // Kiểm tra các phần tử con bên trong
-                const childElements = node.querySelectorAll?.("[data-vi], [data-en]");
+                const childElements = node.querySelectorAll?.("[data-vi], [data-en], [data-zh]");
                 childElements?.forEach(el => {
                     el.textContent = el.getAttribute(`data-${language}`);
                 });
             });
         });
     });
-
     observer.observe(document.body, { childList: true, subtree: true });
 }
-
 function toggleLanguageMenu() {
     const menu = document.getElementById('language-menu');
     menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
-
 document.getElementById('globe-icon').addEventListener('click', (event) => {
     toggleLanguageMenu();
     event.stopPropagation();
 });
-
-// Đóng menu khi bấm ra ngoài
 document.addEventListener('click', (event) => {
     const menu = document.getElementById('language-menu');
     const globeIcon = document.getElementById('globe-icon');
-
-    // Nếu bấm ra ngoài menu và không phải icon, đóng menu
     if (menu.style.display === 'block' && !menu.contains(event.target) && !globeIcon.contains(event.target)) {
         menu.style.display = 'none';
     }
 });
-
-// Hàm để cập nhật giao diện và đánh dấu ngôn ngữ hiện tại
 function updateLanguageSelection(language) {
     const buttons = document.querySelectorAll('.lang-option');
     buttons.forEach(button => {
         button.classList.toggle('active', button.getAttribute('data-lang') === language);
     });
 }
-
-// Kiểm tra ngôn ngữ đã lưu trong localStorage và đặt mặc định nếu chưa có
 const savedLanguage = localStorage.getItem('selectedLanguage') || 'vi';
 setLanguage(savedLanguage);
-
-// Khởi chạy theo dõi các phần tử mới
 observeLanguageElements(savedLanguage);
-
-document.getElementById('setLanguageVI').addEventListener('click', () => {
-    setLanguage('vi');
-});
-
-document.getElementById('setLanguageEN').addEventListener('click', () => {
-    setLanguage('en');
-});
-
-document.getElementById('setLanguageZH').addEventListener('click', () => {
-    setLanguage('zh');
-});
+document.getElementById('setLanguageVI').addEventListener('click', () => setLanguage('vi'));
+document.getElementById('setLanguageEN').addEventListener('click', () => setLanguage('en'));
+document.getElementById('setLanguageZH').addEventListener('click', () => setLanguage('zh'));
 
 // Hàm mở section
 function showSection(sectionId) {
-    // Ẩn tất cả các section
-    document.querySelectorAll("main section").forEach(section => {
-        section.classList.remove("active");
-    });
-
-    // Hiển thị section có ID tương ứng
+    document.querySelectorAll("main section").forEach(section => section.classList.remove("active"));
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
         targetSection.classList.add("active");
     } else {
         console.warn(`Không tìm thấy section với ID: ${sectionId}`);
     }
-
-    // Hàm xử lý thêm class active cho các .address và .address-mobile
+    // Cập nhật .address & .address-mobile
     function updateAddressClasses(selector) {
         document.querySelectorAll(selector).forEach(address => {
-            // Xóa lớp 'active' khỏi tất cả các phần tử
             address.classList.remove("active");
-
-            // Thêm lớp 'active' vào phần tử có data-section-id tương ứng
             if (address.getAttribute("data-section-id") === sectionId) {
                 address.classList.add("active");
             }
         });
     }
-
-    // Cập nhật .address và .address-mobile
     updateAddressClasses(".address");
     updateAddressClasses(".address-mobile");
 }
-
-// Lấy tất cả các .address và .address-mobile
 const addresses = document.querySelectorAll(".address");
 const addressesMobile = document.querySelectorAll(".address-mobile");
-
-// Gán sự kiện click cho từng .address và .address-mobile
-[addresses, addressesMobile].forEach(addressesGroup => {
-    addressesGroup.forEach(address => {
+[addresses, addressesMobile].forEach(group => {
+    group.forEach(address => {
         address.addEventListener("click", () => {
-            // Lấy ID của section từ thuộc tính data-section-id
             const sectionId = address.getAttribute("data-section-id");
-
-            // Gọi hàm hiển thị section
             showSection(sectionId);
         });
     });
 });
-
 document.getElementById("start-session").addEventListener("click", () => showSection("select-template"));
 
-// Thêm ảnh vào queue để xếp
-const MAX_PHOTOS = 12; // Giới hạn số ảnh trong queue
+// ----------------------------------------------
+// Queue & Template Handling
+// ----------------------------------------------
+const MAX_PHOTOS = 12;
 const photoQueue = document.getElementById("photo-queue");
-const cameraPreview = document.getElementById("camera-preview");
-let selectedTemplate = null; // Lưu template được chọn
-let selectedTemplateType = null; // Loại template được chọn
-let filledSlots = []; // Lưu danh sách các slot trong template đã được điền
+let selectedTemplate = null;
+let selectedTemplateType = null;
+let filledSlots = [];
 let photoCount = 0;
 
-// Function to Add Photo to Queue
-// Function to Add Photo to Queue
 function addPhotoToQueue(photoUrl) {
     if (!photoUrl) return;
-
     if (photoQueue.children.length >= MAX_PHOTOS) {
         Swal.fire({
             title: '<span data-vi="Hàng Đợi Đầy" data-en="Queue is Full" data-zh="队列已满"></span>',
@@ -164,46 +115,36 @@ function addPhotoToQueue(photoUrl) {
         });
         return;
     }
-
     const photoWrapper = document.createElement("div");
     photoWrapper.className = "photo-thumbnail";
     photoWrapper.dataset.selected = "false";
 
-    // Add photo
     const photo = document.createElement("img");
     photo.src = photoUrl;
     photo.alt = "Ảnh trong hàng đợi";
     photo.className = "queue-photo";
 
-    // Add remove button
     const removeBtn = document.createElement("button");
     removeBtn.className = "remove-photo";
     removeBtn.textContent = "x";
     removeBtn.addEventListener("click", function (event) {
-        event.stopPropagation(); // Ngăn sự kiện click lan lên photoWrapper
-        // Nếu ảnh đang được chọn trong template, xóa ảnh khỏi template
+        event.stopPropagation();
         if (photoWrapper.dataset.selected === "true") {
             clearImageFromTemplate(photo.src);
         }
         photoQueue.removeChild(photoWrapper);
         photoCount--;
     });
-
-    // Add click event to select/unselect photo for template
     photoWrapper.addEventListener("click", function (event) {
-        // Nếu sự kiện click đến từ nút remove, không xử lý thêm
         if (event.target.closest(".remove-photo")) return;
-
         const isSelected = photoWrapper.dataset.selected === "true";
         if (!isSelected) {
-            // Điền ảnh vào template
             const slotFilled = fillTemplateWithImage(photo.src);
             if (slotFilled) {
                 photoWrapper.style.opacity = "0.5";
                 photoWrapper.dataset.selected = "true";
             }
         } else {
-            // Bỏ chọn ảnh khỏi template
             const slotCleared = clearImageFromTemplate(photo.src);
             if (slotCleared) {
                 photoWrapper.style.opacity = "1";
@@ -211,13 +152,12 @@ function addPhotoToQueue(photoUrl) {
             }
         }
     });
-
     photoWrapper.appendChild(photo);
     photoWrapper.appendChild(removeBtn);
     photoQueue.appendChild(photoWrapper);
+    photoCount++;
 }
 
-// Xử lý chọn ảnh
 document.getElementById("upload-photo").addEventListener("click", function () {
     const fileInput = document.createElement("input");
     fileInput.type = "file";
@@ -230,32 +170,23 @@ document.getElementById("upload-photo").addEventListener("click", function () {
         if (files.length > 0) {
             const remainingSlots = MAX_PHOTOS - photoCount;
             const filesToAdd = Math.min(files.length, remainingSlots);
-
             for (let i = 0; i < filesToAdd; i++) {
                 const file = files[i];
                 const reader = new FileReader();
-
                 reader.onload = function (e) {
                     const img = new Image();
                     img.onload = function () {
-                        // Tạo canvas 1000x1000
+                        // Tạo canvas 1000x1000 để "crop/cover" ảnh vuông
                         const canvas = document.createElement("canvas");
                         canvas.width = 1000;
                         canvas.height = 1000;
                         const ctx = canvas.getContext("2d");
-
-                        // Tính scale để ảnh cover canvas
                         const scale = Math.max(1000 / img.width, 1000 / img.height);
                         const newWidth = img.width * scale;
                         const newHeight = img.height * scale;
-                        // Tính offset để ảnh được căn giữa
                         const dx = (1000 - newWidth) / 2;
                         const dy = (1000 - newHeight) / 2;
-
-                        // Vẽ ảnh lên canvas
                         ctx.drawImage(img, dx, dy, newWidth, newHeight);
-
-                        // Xuất ảnh ra định dạng JPEG với chất lượng 1
                         const formattedDataUrl = canvas.toDataURL("image/jpeg", 1);
                         addPhotoToQueue(formattedDataUrl);
                     };
@@ -263,8 +194,6 @@ document.getElementById("upload-photo").addEventListener("click", function () {
                 };
                 reader.readAsDataURL(file);
             }
-
-            photoCount += filesToAdd;
         }
     });
 
@@ -273,112 +202,156 @@ document.getElementById("upload-photo").addEventListener("click", function () {
     document.body.removeChild(fileInput);
 });
 
+// ----------------------------------------------
+// Camera & Filter Handling
+// ----------------------------------------------
 let flipCamera = true;
+let cameraFilter = "none";  // Lưu filter đang chọn
 
-// Xử lý chụp ảnh
 document.addEventListener("DOMContentLoaded", function () {
     const video = document.getElementById("camera-video");
     const captureButton = document.getElementById("capture-button");
     const autoTakePhotoButton = document.getElementById("auto-take-photo");
     const flipToggle = document.getElementById("flip-toggle");
 
-    // Hàm cập nhật transform cho video dựa trên trạng thái flipCamera
+    // Danh sách filter áp dụng lên camera
+    const filters = [
+        { name: "Default", style: "none" },
+        {
+            name: "Walden",
+            style: "brightness(1.2) saturate(1.3) hue-rotate(10deg)"
+        },
+        {
+            name: "Amaro",
+            style: "brightness(1.1) saturate(1.5) contrast(0.9) hue-rotate(-5deg)"
+        },
+        {
+            name: "Lo-Fi",
+            style: "contrast(1.6) saturate(1.6) brightness(0.9)"
+        },
+        {
+            name: "Hefe",
+            style: "contrast(1.3) sepia(0.2) saturate(1.3) brightness(1.3)"
+        },
+        {
+            name: "Toaster",
+            style: "sepia(0.4) contrast(1.5) brightness(0.9) hue-rotate(-15deg)"
+        },
+        {
+            name: "1977",
+            style: "sepia(0.3) hue-rotate(-30deg) saturate(1.3) brightness(1.1)"
+        },
+        {
+            name: "Kelvin",
+            style: "sepia(0.3) contrast(1.5) brightness(1.5) saturate(2)"
+        },
+        {
+            name: "Hudson",
+            style: "brightness(1.2) contrast(0.9) saturate(1.2) hue-rotate(-15deg)"
+        },
+        {
+            name: "Valencia",
+            style: "sepia(0.15) saturate(1.4) brightness(1.1) contrast(1.1)"
+        },
+        {
+            name: "Willow",
+            style: "grayscale(0.9) brightness(1.1) contrast(1.2)"
+        },
+        {
+            name: "Nashville",
+            style: "sepia(0.25) contrast(1.5) saturate(1.4) hue-rotate(15deg) brightness(1.1)"
+        },
+        {
+            name: "Clarendon",
+            style: "contrast(1.2) saturate(1.35) brightness(1.1)"
+        },
+        {
+            name: "Gingham",
+            style: "contrast(1.1) brightness(1.05) sepia(0.02)"
+        },
+        {
+            name: "Juno",
+            style: "saturate(1.5) contrast(1.15)"
+        },
+        {
+            name: "Lark",
+            style: "brightness(1.1) saturate(1.3)"
+        },
+        {
+            name: "Reyes",
+            style: "sepia(0.75) contrast(0.75) brightness(1.25) saturate(1.4)"
+        },
+        {
+            name: "X-Pro II",
+            style: "sepia(0.3) contrast(1.3) brightness(1.25) saturate(1.3)"
+        }
+    ];
+
+    // Đổ filter lên giao diện
+    const filterContainer = document.querySelector(".filter-options");
+    filterContainer.innerHTML = "";
+    filters.forEach((filter) => {
+        const filterElement = document.createElement("div");
+        filterElement.className = "filter";
+        filterElement.textContent = filter.name;
+        filterElement.style.filter = filter.style === "none" ? "none" : filter.style;
+        filterElement.addEventListener("click", function () {
+            cameraFilter = filter.style;
+            video.style.filter = filter.style;  // Áp dụng realtime cho video
+        });
+        filterContainer.appendChild(filterElement);
+    });
+
     function updateVideoTransform() {
         video.style.transform = flipCamera ? "scaleX(-1)" : "none";
     }
 
-    // Hàm chụp ảnh dùng chung cho cả hai nút
-    function capturePhoto() {
-        // Tạo canvas để chụp ảnh từ video
-        const captureCanvas = document.createElement("canvas");
-        captureCanvas.width = video.videoWidth;
-        captureCanvas.height = video.videoHeight;
-        const captureCtx = captureCanvas.getContext("2d");
-
-        // Nếu flipCamera = true, áp dụng transform lật ngang
-        if (flipCamera) {
-            captureCtx.translate(captureCanvas.width, 0);
-            captureCtx.scale(-1, 1);
-        }
-        // Vẽ video lên canvas capture
-        captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
-
-        // Tạo canvas mới với kích thước cố định 1000x1000
-        const formattedCanvas = document.createElement("canvas");
-        formattedCanvas.width = 1000;
-        formattedCanvas.height = 1000;
-        const formattedCtx = formattedCanvas.getContext("2d");
-
-        // Tính toán tỉ lệ scale để ảnh cover canvas 1000x1000
-        const scale = Math.max(1000 / captureCanvas.width, 1000 / captureCanvas.height);
-        const newWidth = captureCanvas.width * scale;
-        const newHeight = captureCanvas.height * scale;
-        // Tính offset để căn giữa ảnh trong canvas
-        const dx = (1000 - newWidth) / 2;
-        const dy = (1000 - newHeight) / 2;
-
-        // Vẽ ảnh từ canvas capture vào canvas đã format
-        formattedCtx.drawImage(captureCanvas, dx, dy, newWidth, newHeight);
-
-        // Xuất ảnh ra định dạng JPEG với chất lượng 1
-        const photoUrl = formattedCanvas.toDataURL("image/jpeg", 1);
-        addPhotoToQueue(photoUrl);
-    }
-
-    // Khi tùy chọn flip được thay đổi
-    flipToggle.addEventListener("change", function () {
-        flipCamera = this.checked;
-        updateVideoTransform();
-    });
-
-    // Mở camera khi trang web được tải
-    navigator.mediaDevices
-        .getUserMedia({ video: true })
+    // Mở camera
+    navigator.mediaDevices.getUserMedia({ video: true })
         .then((stream) => {
             video.srcObject = stream;
             video.play();
-            // Áp dụng transform theo trạng thái ban đầu
             updateVideoTransform();
 
-            // Xử lý chụp ảnh khi bấm nút "chụp ảnh"
+            // Nút chụp ảnh
             captureButton.addEventListener("click", function () {
                 capturePhoto();
             });
 
-            // Xử lý nút "auto chụp ảnh" với đếm ngược 5 giây
-            autoTakePhotoButton.addEventListener("click", function () {
-                let countdown = 5;
-
-                // Tạo overlay đếm ngược
-                const countdownOverlay = document.createElement("div");
-                countdownOverlay.id = "countdown-overlay";
-                countdownOverlay.style.position = "absolute";
-                countdownOverlay.style.top = "50%";
-                countdownOverlay.style.left = "50%";
-                countdownOverlay.style.transform = "translate(-50%, -50%)";
-                countdownOverlay.style.fontSize = "69px";
-                countdownOverlay.style.fontWeight = "600";
-                countdownOverlay.style.color = "#fff";
-                countdownOverlay.style.padding = "10px 20px";
-                countdownOverlay.style.borderRadius = "8px";
-
-                // Đảm bảo thẻ cha của video có position relative để overlay hiển thị chính xác
-                document.getElementById('camera-container').style.position = "relative";
-                document.getElementById('camera-container').appendChild(countdownOverlay);
-
-                countdownOverlay.textContent = countdown;
-
-                // Đếm ngược mỗi giây
-                const interval = setInterval(() => {
-                    countdown--;
-                    if (countdown > 0) {
-                        countdownOverlay.textContent = countdown;
-                    } else {
-                        clearInterval(interval);
-                        countdownOverlay.remove();
-                        capturePhoto();
-                    }
+            function showCountdownNumber(number) {
+                const countdownCircle = document.createElement("div");
+                countdownCircle.className = "countdown-circle";
+                countdownCircle.textContent = number;
+                const container = document.getElementById('camera-container');
+                container.appendChild(countdownCircle);
+                // Loại bỏ sau 1 giây (thời gian animation)
+                setTimeout(() => {
+                    countdownCircle.remove();
                 }, 1000);
+            }
+
+            // Nút chụp ảnh sau 5s
+            autoTakePhotoButton.addEventListener("click", function () {
+                let cycles = 4; // Số chu trình chụp ảnh
+
+                function runCountdownCycle() {
+                    let countdown = 5;
+                    const countdownInterval = setInterval(() => {
+                        showCountdownNumber(countdown); // Hiển thị số với hiệu ứng pulse
+                        countdown--;
+                        if (countdown < 0) {
+                            clearInterval(countdownInterval);
+                            capturePhoto(); // Chụp ảnh khi đếm xong
+                            cycles--;
+                            if (cycles > 0) {
+                                // Chờ thêm 1 giây rồi bắt đầu chu trình mới
+                                setTimeout(runCountdownCycle, 1000);
+                            }
+                        }
+                    }, 1000);
+                }
+
+                runCountdownCycle();
             });
         })
         .catch((err) => {
@@ -388,18 +361,60 @@ document.addEventListener("DOMContentLoaded", function () {
                 icon: 'error',
                 confirmButtonText: '<span data-vi="OK" data-en="OK" data-zh="好的"></span>'
             });
-        });
+        }
+        );
+
+    // Flip camera
+    flipToggle.addEventListener("change", function () {
+        flipCamera = this.checked;
+        updateVideoTransform();
+    });
+
+    // Hàm chụp ảnh, có áp dụng filter
+    function capturePhoto() {
+        const captureCanvas = document.createElement("canvas");
+        captureCanvas.width = video.videoWidth;
+        captureCanvas.height = video.videoHeight;
+        const captureCtx = captureCanvas.getContext("2d");
+
+        // Áp dụng filter vào canvas
+        captureCtx.filter = cameraFilter || "none";
+
+        // Nếu lật cam, vẽ ngược
+        if (flipCamera) {
+            captureCtx.translate(captureCanvas.width, 0);
+            captureCtx.scale(-1, 1);
+        }
+        captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
+
+        // Đưa ảnh về 1000x1000 cho đồng nhất
+        const formattedCanvas = document.createElement("canvas");
+        formattedCanvas.width = 1000;
+        formattedCanvas.height = 1000;
+        const formattedCtx = formattedCanvas.getContext("2d");
+        // Muốn filter ảnh đã được "in" lên captureCanvas, không cần set filter lần nữa
+        const scale = Math.max(1000 / captureCanvas.width, 1000 / captureCanvas.height);
+        const newWidth = captureCanvas.width * scale;
+        const newHeight = captureCanvas.height * scale;
+        const dx = (1000 - newWidth) / 2;
+        const dy = (1000 - newHeight) / 2;
+
+        formattedCtx.drawImage(captureCanvas, dx, dy, newWidth, newHeight);
+        const photoUrl = formattedCanvas.toDataURL("image/jpeg", 1);
+
+        addPhotoToQueue(photoUrl);
+    }
 });
 
-// Gắn sự kiện cho tất cả template
+// ----------------------------------------------
+// Template Selection
+// ----------------------------------------------
 document.querySelectorAll(".photo-template").forEach((template) => {
     template.addEventListener("click", function () {
-        // Sao chép template được chọn
         selectedTemplate = template.cloneNode(true);
         selectedTemplate.id = "selected-template";
         selectedTemplate.style.pointerEvents = "none";
 
-        // Lưu loại template dựa trên id
         const photoDiv = selectedTemplate.querySelector(".photo");
         if (photoDiv) {
             selectedTemplateType = photoDiv.id;
@@ -407,19 +422,15 @@ document.querySelectorAll(".photo-template").forEach((template) => {
             selectedTemplateType = null;
         }
 
-        // Hiển thị template đã chọn
         const templateContainer = document.getElementById("selected-template-container");
         templateContainer.innerHTML = "";
         templateContainer.appendChild(selectedTemplate);
 
-        // Reset trạng thái các slot
         filledSlots = Array.from(selectedTemplate.querySelectorAll("img")).map(() => null);
-
         showSection("upload-or-take-photos");
     });
 });
 
-// Điền ảnh vào template
 function fillTemplateWithImage(photoUrl) {
     if (!selectedTemplate) {
         Swal.fire({
@@ -430,12 +441,11 @@ function fillTemplateWithImage(photoUrl) {
         });
         return false;
     }
-
     const imgPlaceholders = selectedTemplate.querySelectorAll("img");
     for (let i = 0; i < imgPlaceholders.length; i++) {
         if (!filledSlots[i]) {
-            imgPlaceholders[i].src = photoUrl; // Điền ảnh vào slot
-            filledSlots[i] = photoUrl; // Lưu trạng thái slot đã điền
+            imgPlaceholders[i].src = photoUrl;
+            filledSlots[i] = photoUrl;
             return true;
         }
     }
@@ -448,15 +458,13 @@ function fillTemplateWithImage(photoUrl) {
     return false;
 }
 
-// Xóa ảnh khỏi template
 function clearImageFromTemplate(photoUrl) {
     if (!selectedTemplate) return false;
-
     const imgPlaceholders = selectedTemplate.querySelectorAll("img");
     for (let i = 0; i < imgPlaceholders.length; i++) {
         if (filledSlots[i] === photoUrl) {
             imgPlaceholders[i].src = "/assets/images/placehoder.webp";
-            filledSlots[i] = null; // Xóa trạng thái slot
+            filledSlots[i] = null;
             return true;
         }
     }
@@ -464,7 +472,6 @@ function clearImageFromTemplate(photoUrl) {
 }
 
 document.getElementById("go-to-select-frame").addEventListener("click", function () {
-    // Kiểm tra nếu template đã được chọn
     if (!selectedTemplate) {
         Swal.fire({
             title: '<span data-vi="Chưa Chọn Mẫu" data-en="Template Not Selected" data-zh="未选择模板"></span>',
@@ -474,13 +481,10 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
         });
         return;
     }
-
-    // Kiểm tra nếu tất cả slot đã được điền
     const imgPlaceholders = selectedTemplate.querySelectorAll("img");
     const allSlotsFilled = Array.from(imgPlaceholders).every(
         (img) => !img.src.includes("placehoder")
     );
-
     if (!allSlotsFilled) {
         Swal.fire({
             title: '<span data-vi="Chưa Đủ Ảnh" data-en="Not Enough Images" data-zh="图片不足"></span>',
@@ -490,22 +494,16 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
         });
         return;
     }
+    photoQueue.innerHTML = "";
+    photoCount = 0;
+    filledSlots = [];
 
-    // **BẮT ĐẦU: XÓA HÀNG ĐỢI ẢNH**
-    photoQueue.innerHTML = ""; // Xóa tất cả các ảnh trong hàng đợi
-    photoCount = 0; // Reset số lượng ảnh
-    filledSlots = []; // Reset danh sách các slot đã điền
-    // **KẾT THÚC: XÓA HÀNG ĐỢI ẢNH**
-
-    // Hiển thị template đang được edit trong section select-frame
     const selectFrameContainer = document.getElementById('template-need-select-frame');
     const frameContainer = document.querySelector(".frame-options");
-    frameContainer.innerHTML = ""; // Xóa các frame cũ
+    frameContainer.innerHTML = "";
 
-    // Lấy khối .photo cụ thể trong template
     const targetPhoto = selectedTemplate.querySelector(".photo");
     if (targetPhoto) {
-        // Tìm hoặc thêm khối frame-preview vào bên trong targetPhoto
         let previewContainer = targetPhoto.querySelector("#frame-preview");
         if (!previewContainer) {
             previewContainer = document.createElement("div");
@@ -514,8 +512,6 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
             targetPhoto.style.position = "relative";
             targetPhoto.appendChild(previewContainer);
         }
-
-        // Thêm khối photo vào template-need-select-frame
         const existingPhotoContainer = selectFrameContainer.querySelector(".photo");
         if (existingPhotoContainer) {
             selectFrameContainer.replaceChild(targetPhoto, existingPhotoContainer);
@@ -532,7 +528,7 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
         return;
     }
 
-    // Thêm danh sách frame
+    // Thêm frame
     const frames = getFramesByTemplateType(selectedTemplateType);
     frames.forEach((frame) => {
         const frameElement = document.createElement("img");
@@ -548,59 +544,12 @@ document.getElementById("go-to-select-frame").addEventListener("click", function
         frameContainer.appendChild(frameElement);
     });
 
-    // Thêm filter cố định
-    const filterContainer = document.querySelector(".filter-options");
-    filterContainer.innerHTML = ""; // Xóa filter cũ
-
-    const filters = [
-        { name: "Default", style: "unset" },
-        { name: "Grayscale", style: "grayscale(100%)" },
-        { name: "Sepia", style: "sepia(100%)" },
-        { name: "Blur", style: "blur(5px)" },
-        { name: "Brightness", style: "brightness(1.5)" },
-        { name: "Contrast", style: "contrast(200%)" },
-        { name: "Hue Rotate", style: "hue-rotate(90deg)" },
-        { name: "Invert", style: "invert(100%)" },
-        { name: "Saturate", style: "saturate(300%)" },
-        { name: "Opacity", style: "opacity(50%)" },
-        { name: "Drop Shadow", style: "drop-shadow(10px 10px 10px gray)" },
-        { name: "Warm", style: "sepia(30%) brightness(1.2) contrast(1.1)" },
-        { name: "Cold", style: "hue-rotate(180deg) brightness(0.8)" },
-        { name: "Vintage", style: "sepia(50%) saturate(50%) contrast(1.2)" },
-        { name: "Night Vision", style: "invert(100%) hue-rotate(180deg)" },
-        { name: "Glow", style: "brightness(1.5) contrast(2)" },
-        { name: "Shadowed", style: "drop-shadow(20px 20px 15px black)" },
-        { name: "Sharp", style: "contrast(300%) brightness(1.2)" },
-        { name: "Frosted Glass", style: "blur(3px) brightness(1.1)" },
-        { name: "Pastel", style: "saturate(150%) brightness(1.3) hue-rotate(-20deg)" },
-        { name: "Golden Hour", style: "sepia(60%) brightness(1.2) saturate(1.5)" }
-    ];
-
-    filters.forEach((filter) => {
-        const filterElement = document.createElement("div");
-        filterElement.className = "filter";
-        filterElement.textContent = filter.name;
-        filterElement.style.filter = filter.style;
-        filterElement.addEventListener("click", function () {
-            const imgs = selectFrameContainer.querySelectorAll("img");
-            imgs.forEach((img) => {
-                img.style.filter = filter.style;
-            });
-        });
-        filterContainer.appendChild(filterElement);
-    });
-
+    // KHÔNG ADD FILTER Ở ĐÂY NỮA
     showSection("select-frame");
 });
 
 document.getElementById("go-to-preview-and-save").addEventListener("click", function () {
-    // Kiểm tra nếu frame đã được chọn (nếu có yêu cầu)
     const framePreview = document.getElementById("frame-preview");
-    if (framePreview && framePreview.style.backgroundImage === "") {
-        // Nếu người dùng có thể chọn "No Frame", thì không bắt buộc
-        // Bạn có thể bỏ qua kiểm tra này hoặc thêm thông báo nếu cần
-    }
-
     if (!selectedTemplate) {
         Swal.fire({
             title: '<span data-vi="Chưa Chọn Mẫu" data-en="Template Not Selected" data-zh="未选择模板"></span>',
@@ -610,13 +559,10 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
         });
         return;
     }
-
-    // Kiểm tra xem template đã được điền đầy đủ chưa
     const imgPlaceholders = selectedTemplate.querySelectorAll("img");
     const allSlotsFilled = Array.from(imgPlaceholders).every(
         (img) => !img.src.includes("placehoder")
     );
-
     if (!allSlotsFilled) {
         Swal.fire({
             title: '<span data-vi="Chưa Đủ Ảnh" data-en="Not Enough Images" data-zh="图片不足"></span>',
@@ -626,8 +572,6 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
         });
         return;
     }
-
-    // Lấy trực tiếp .photo từ section select-frame
     const selectFrameSection = document.getElementById("select-frame");
     const photoDiv = selectFrameSection.querySelector(".photo");
     if (!photoDiv) {
@@ -639,25 +583,17 @@ document.getElementById("go-to-preview-and-save").addEventListener("click", func
         });
         return;
     }
-
-    // Clone .photo div
     const photoClone = photoDiv.cloneNode(true);
-
-    // Thêm class 'photo-preview' vào bản sao
     photoClone.classList.add("photo-preview");
-
-    // Hiển thị bản sao trong section "preview-and-save"
     const photoPreviewContainer = document.getElementById("photo-preview");
-    photoPreviewContainer.innerHTML = ""; // Xóa preview trước đó nếu có
+    photoPreviewContainer.innerHTML = "";
     photoPreviewContainer.appendChild(photoClone);
 
     showSection("preview-and-save");
 });
 
 document.getElementById("save-photo").addEventListener("click", function () {
-    // Find the preview photo element
     const photoPreview = document.querySelector(".photo-preview");
-
     if (!photoPreview) {
         Swal.fire({
             title: '<span data-vi="Lỗi" data-en="Error" data-zh="错误"></span>',
@@ -667,15 +603,10 @@ document.getElementById("save-photo").addEventListener("click", function () {
         });
         return;
     }
-
-    // Clone the preview photo
     const photoClone = photoPreview.cloneNode(true);
-
-    // Change class of the clone
     photoClone.classList.remove("photo-preview");
     photoClone.classList.add("photo-print");
 
-    // Create a temporary container and append the cloned photo to it
     const tempContainer = document.createElement("div");
     tempContainer.style.position = "absolute";
     tempContainer.style.top = "-9999px";
@@ -683,24 +614,18 @@ document.getElementById("save-photo").addEventListener("click", function () {
     tempContainer.appendChild(photoClone);
     document.body.appendChild(tempContainer);
 
-    // Use dom-to-image to create an image from the clone
     domtoimage.toPng(photoClone)
         .then(function (dataUrl) {
-            // Remove the temporary container after creating the image
             document.body.removeChild(tempContainer);
-
-            // Check if the user is on iOS
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             if (isIOS) {
-                // Adjust the image scaling to fit full width if needed
                 const downloadLink = document.createElement("a");
                 downloadLink.href = dataUrl;
-                downloadLink.download = "cutebooth.png"; // Set filename for the downloaded file
+                downloadLink.download = "cutebooth.png";
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
             } else {
-                // Trigger download for non-iOS devices
                 const downloadLink = document.createElement("a");
                 downloadLink.href = dataUrl;
                 downloadLink.download = "cutebooth.png";
@@ -721,31 +646,22 @@ document.getElementById("save-photo").addEventListener("click", function () {
         });
 });
 
-// Hàm tải frame template
+// Tải khung template
 function downloadFrameTemplate(url) {
-    // Kiểm tra xem URL có hợp lệ không
     if (!url || typeof url !== 'string') {
-        console.error("URL không hợp lệ. Vui lòng cung cấp một URL hợp lệ.");
+        console.error("URL không hợp lệ.");
         return;
     }
-
-    // Tạo một thẻ <a> để kích hoạt download
     const link = document.createElement('a');
     link.href = url;
-
-    // Lấy tên tệp từ URL (nếu có)
     const fileName = url.substring(url.lastIndexOf('/') + 1);
     link.download = fileName || 'downloaded_file';
-
-    // Thêm thẻ <a> vào DOM, kích hoạt click, và xóa thẻ sau khi tải xong
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
     console.log(`Đã tải xuống tệp từ URL: ${url}`);
 }
 
-// Lấy frame dựa trên loại template
 function getFramesByTemplateType(templateType) {
     const framesData = {
         "template-1-photo": [
@@ -786,6 +702,5 @@ function getFramesByTemplateType(templateType) {
             { id: 5, src: "/assets/frame/8-photos/1.webp" },
         ],
     };
-
     return framesData[templateType] || [];
 }

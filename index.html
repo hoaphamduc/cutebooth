@@ -64,7 +64,7 @@
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Cutebooth",
-          "url": "https://cutebooth.netlify.app",
+          "url": "https://cutebooth.netlify.app"
         }
     </script>
 
@@ -148,6 +148,7 @@
     </header>
 
     <main>
+        <!-- WELCOME -->
         <section id="welcome" class="active">
             <div id="welcome-content">
                 <h1 class="custom-text-color welcomte-text"
@@ -304,6 +305,7 @@
             </div>
         </section>
 
+        <!-- SELECT TEMPLATE -->
         <section id="select-template">
             <h2 data-vi="Chọn template mà bạn muốn sử dụng" data-en="Choose the template you want to use"
                 data-zh="选择您想要使用的模板"></h2>
@@ -315,7 +317,7 @@
                     </div>
                 </div>
 
-                <!-- Template Ảnh Dài (Photostrip, 3 ảnh) (600 x 1800 px) -->
+                <!-- Template 3 ảnh -->
                 <div class="photo-template">
                     <div class="photo" id="template-3-photos">
                         <img src="/assets/images/placehoder.webp"
@@ -327,7 +329,7 @@
                     </div>
                 </div>
 
-                <!-- Template Ảnh Dài (Photostrip, 4 ảnh) (600 x 1800 px) -->
+                <!-- Template 4 ảnh (photostrip) -->
                 <div class="photo-template">
                     <div class="photo" id="template-4-photos">
                         <img src="/assets/images/placehoder.webp"
@@ -341,7 +343,7 @@
                     </div>
                 </div>
 
-                <!-- Template Ảnh rộng (1200 x 1800 px) -->
+                <!-- Template 4 ảnh (2 cột) -->
                 <div class="photo-template">
                     <div class="photo" id="template-4-photos-2">
                         <img src="/assets/images/placehoder.webp"
@@ -359,7 +361,7 @@
                     </div>
                 </div>
 
-                <!-- Template 8 Ảnh rộng (1200 x 2400 px) -->
+                <!-- Template 8 ảnh -->
                 <div class="photo-template">
                     <div class="photo" id="template-8-photos">
                         <img src="/assets/images/placehoder.webp"
@@ -389,9 +391,9 @@
                     </div>
                 </div>
             </div>
-
         </section>
 
+        <!-- UPLOAD OR TAKE PHOTOS (ĐÃ CHUYỂN FILTER SANG ĐÂY) -->
         <section id="upload-or-take-photos">
             <div class="camera-container">
                 <div class="camera-container-column">
@@ -403,15 +405,16 @@
                             <span class="span-btn" onclick="showSection('select-template')" data-vi="Nhấp vào tôi"
                                 data-en="Click me" data-zh="点击我"></span>
                         </span>
-                        <!-- Template được chọn sẽ hiển thị tại đây -->
+                        <!-- Template đã chọn sẽ hiển thị tại đây -->
                     </div>
                 </div>
 
                 <div class="camera-container-column" id="camera-preview">
-                    <!-- Video và nút đã được định nghĩa sẵn -->
-                    <div id="camera-container" style="position: relative;width: fit-content;height: fit-content;">
+                    <!-- Video (camera) và nút chụp ảnh -->
+                    <div id="camera-container" style="position: relative; width: fit-content; height: fit-content;">
                         <video id="camera-video" autoplay playsinline></video>
                     </div>
+
                     <div class="camera-action">
                         <button id="upload-photo" class="custom-button-2">
                             <img src="/assets/images/image-upload.webp" alt="Nút upload ảnh">
@@ -431,12 +434,21 @@
                             <img src="/assets/images/flip.webp" alt="Nút lật ảnh">
                         </label>
                     </div>
+
+                    <!-- FILTER CHO CAMERA -->
+                    <div class="filter-option-container" style="margin-top: 15px;">
+                        <div class="filter-options">
+                            <!-- Các filter sẽ được khởi tạo qua JS -->
+                        </div>
+                    </div>
                 </div>
 
+                <!-- CHUYỂN KHỐI FILTER SANG ĐÂY ĐỂ ÁP DỤNG LÊN CAMERA -->
                 <div class="camera-container-column mobile-flex-column-reverse">
                     <h3 data-vi="Hàng đợi ảnh (tối đa: 12 ảnh). Nhấn vào ảnh trong hàng đợi để điền ảnh vào mẫu, bạn có thể nhấn thêm lần nữa để hủy chọn."
                         data-en="Image queue (max: 12 images). Click on an image in the queue to add it to the template, you can click again to deselect."
                         data-zh="图片队列（最多：12张图片）。点击队列中的图片将其添加到模板中，您可以再次点击以取消选择。"></h3>
+
                     <div id="photo-queue">
                         <!-- Preview of uploaded or taken photos -->
                     </div>
@@ -450,6 +462,7 @@
             </div>
         </section>
 
+        <!-- CHỌN KHUNG (LƯU NGUYÊN) -->
         <section id="select-frame">
             <div class="select-frame-container">
                 <div class="select-frame-column">
@@ -467,29 +480,24 @@
                                 <span class="span-btn" onclick="showSection('upload-or-take-photos')"
                                     data-vi="Nhấp vào tôi" data-en="Click me" data-zh="点击我"></span>
                             </span>
-                            <!-- Frames sẽ hiển thị tại đây -->
+                            <!-- Frames hiển thị tại đây qua JS -->
                         </div>
                     </div>
 
-                    <div class="filter-option-container">
-                        <div class="filter-options">
-                            <!-- Filters sẽ hiển thị tại đây -->
-                        </div>
-                    </div>
+                    <!-- **ĐÃ BỎ filter-option-container khỏi đây** -->
 
                     <button id="go-to-preview-and-save" class="custom-button">
                         <span data-vi="Xem thành quả" data-en="View result" data-zh="查看结果"></span>
                     </button>
                 </div>
             </div>
-
-
         </section>
 
+        <!-- XEM TRƯỚC VÀ LƯU ẢNH -->
         <section id="preview-and-save">
             <div class="preview-container">
                 <div class="preview-column">
-                    <!-- Chờ chèn quảng cáo -->
+                    <!-- Chờ chèn quảng cáo (nếu có) -->
                 </div>
 
                 <div class="preview-column">
@@ -499,7 +507,6 @@
                             data-zh="您没有可保存的图片，请检查上一步"></span>
                         <span class="span-btn" onclick="showSection('select-frame')" data-vi="Nhấp vào tôi"
                             data-en="Click me" data-zh="点击我"></span>
-                        <!-- Preview của ảnh sẽ được hiển thị tại đây -->
                     </div>
                 </div>
 
@@ -540,6 +547,7 @@
             </div>
         </section>
 
+        <!-- DONATE US -->
         <section id="donate-us">
             <div class="preview-container">
                 <div class="preview-column" id="feedback">
@@ -582,7 +590,6 @@
                     <!-- Chờ chèn quảng cáo -->
                 </div>
             </div>
-
         </section>
 
     </main>
