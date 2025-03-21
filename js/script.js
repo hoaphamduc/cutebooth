@@ -686,6 +686,11 @@ function getFramesByTemplateType(templateType) {
         ],
         "template-4-photos": [
             { id: 1, src: "/assets/frame/4-photos/no-frame.png" },
+            { id: 17, src: "/assets/frame/4-photos/11.webp" },
+            { id: 17, src: "/assets/frame/4-photos/12.webp" },
+            { id: 17, src: "/assets/frame/4-photos/13.webp" },
+            { id: 17, src: "/assets/frame/4-photos/14.webp" },
+            { id: 17, src: "/assets/frame/4-photos/15.webp" },
             { id: 7, src: "/assets/frame/4-photos/Faker.png" },
             { id: 8, src: "/assets/frame/4-photos/Gumayusi.png" },
             { id: 9, src: "/assets/frame/4-photos/Keria.png" },
